@@ -15,7 +15,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $last_name = trim($_POST["last_name"]);
     $email = trim($_POST["email"]);
     $password = trim($_POST["password"]);
-    $user_type = $_POST["user_type"];
     $phone = trim($_POST["phone"]);
     $address = trim($_POST["address"]);
     $age = intval($_POST["age"]);
@@ -25,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $bank_name = trim($_POST["bank_name"]);
 
     // Validate input fields
-    if (empty($first_name) || empty($last_name) || empty($email) || empty($password) || empty($user_type) || empty($phone) || empty($address) || empty($age) || empty($sex) || empty($interests)) {
+    if (empty($first_name) || empty($last_name) || empty($email) || empty($password) || empty($phone) || empty($address) || empty($age) || empty($sex) || empty($interests)) {
         header("Location: signup.php?error=Please fill in all required fields");
         exit();
     }
@@ -34,14 +33,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
     // Insert user into the database
-    $sql = "INSERT INTO users (first_name, last_name, email, password, user_type, phone, address, age, sex, interests, bank_account_number, bank_name) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO users (first_name, last_name, email, password, phone, address, age, sex, interests, bank_account_number, bank_name, user_type) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'customer')";
 
     $stmt = $conn->prepare($sql);
 
     if ($stmt) {
         // Bind the parameters
-        $stmt->bind_param("ssssssssssss", $first_name, $last_name, $email, $hashed_password, $user_type, $phone, $address, $age, $sex, $interests, $bank_account_number, $bank_name);
+        $stmt->bind_param("sssssssssss", $first_name, $last_name, $email, $hashed_password, $phone, $address, $age, $sex, $interests, $bank_account_number, $bank_name);
 
         // Execute the query and check for success
         if ($stmt->execute()) {

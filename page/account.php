@@ -91,6 +91,15 @@
             <a href="change_password.php" class="btn">Change Password</a>
             <a href="change_email.php" class="btn">Change Email</a>
             <a href="Bank_information.php" class="btn">Change Bank Information</a>
+            <?php if ($user["user_type"] === "seller"): ?>
+                <a href="seller.php" class="btn">Go to Seller Account</a>
+            <?php elseif ($user["user_type"] === "customer"): ?>
+                <a href="register_seller_form.php" class="btn">Create a Seller Account</a>
+            <?php endif; ?>
+        </section>
+        <!-- Conditional Buttons -->
+        <section class="user-actions">
+            
         </section>
 
         <?php if ($isAdmin): ?>

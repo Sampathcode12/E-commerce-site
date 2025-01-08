@@ -30,11 +30,7 @@
     <input type="password" id="password" name="password" required>
 
     <!-- Select User Type -->
-    <label for="user_type">User Type:</label>
-    <select id="user_type" name="user_type" required>
-        <option value="customer">Customer</option>
-        <option value="seller">Seller</option>
-    </select>
+    
     <div class="form-group">
                 <label for="phone">Phone</label>
                 <input type="text" id="phone" name="phone" required>

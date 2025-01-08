@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 } elseif ($db_user_type === "customer") {
                     header("Location: Home.php");
                 } elseif ($db_user_type === "seller") {
-                    header("Location: sellerseller.php");
+                    header("Location: Home.php");
                 }
                 exit();
             } else {
