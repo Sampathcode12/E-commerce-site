@@ -1,0 +1,177 @@
+/* General reset and body styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* Header Floater */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+}
+.header .logo h1 {
+    margin-left: 20px;
+}
+.header .navbar ul {
+    display: flex;
+    list-style-type: none;
+}
+.header .navbar ul li {
+    margin: 0 20px;
+}
+.header .navbar ul li a {
+    color: white;
+    text-decoration: none;
+}
+.header .search input {
+    padding: 5px;
+    width: 200px;
+    border: none;
+}
+
+/* Floating Action Button */
+.floating-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+.floating-button button {
+    background-color: #ff5722;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 30px;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+/* Main Page */
+.main-page {
+    padding-top: 80px; /* To avoid content overlap with header */
+}
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+.product-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+}
+.product-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+.product-card h3 {
+    margin: 10px 0;
+}
+.product-card .price {
+    color: #ff5722;
+    font-size: 18px;
+}
+.product-card .add-to-cart {
+    padding: 10px 20px;
+    background-color: #ff5722;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Account Icon */
+.header .account {
+    margin-right: 20px;
+}
+.header .account a {
+    color: white;
+    font-size: 30px;
+    text-decoration: none;
+}
+.header .account a:hover {
+    color: #ff5722; /* Change color on hover */
+}
+
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* Notification Styling */
+.notification {
+    position: fixed; /* Ensures it stays in one spot */
+    top: 0;          /* Aligns it to the top of the page */
+    left: 0;
+    width: 100%;     /* Takes up full width */
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+    color: white;
+    padding: 1rem;
+    z-index: 1000;   /* Places it above the header */
+    display: none;   /* Hidden by default */
+}
+
+.notification-content {
+    text-align: center;
+}
+
+.header {
+    position: relative;
+    z-index: 10; /* Ensure header is beneath the notification */
+}
+
+.notification .btn {
+    background-color: white;
+    color: #ff5722;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.notification .btn:hover {
+    background-color: #ff7043;
+    color: white;
+}
+
+.notification .close-btn {
+    background-color: transparent;
+    color: white;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    position: absolute;
+    top: 50px;
+    right: 20px;
+}
+
+.notification .close-btn:hover {
+    color: #ffb74d;
+}
