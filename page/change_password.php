@@ -5,11 +5,7 @@ if (!isset($_SESSION["user_id"])) {
     exit();
 }
 
-// Database connection
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "ecommerce";
+include"Database.php";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 

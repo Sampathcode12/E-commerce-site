@@ -7,59 +7,74 @@ $username = "root";
 $password = "";
 $dbname = "ecommerce";
 
+
+   $conn;                 // Connection instance
+
+
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Check if form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim($_POST["email"]);
     $password = trim($_POST["password"]);
+    $user_type = isset($_POST["user_type"]) ? $_POST["user_type"] : 'customer';
 
-    // Validate input
+    // Check if it's an admin login (hardcoded check)
+    if ($email === 'admin@example.com' && $password === 'adminpassword') {
+        // Hard-code admin login
+        $_SESSION["user_id"] = 1;  // Set a fake admin user ID for now
+        $_SESSION["user_type"] = 'admin';
+        header("Location:account.php");
+        exit();
+    }
+
     if (empty($email) || empty($password)) {
         header("Location: login.php?error=Please fill in all fields");
         exit();
     }
 
-    // Check if email exists in the database
-    $sql = "SELECT id, password FROM users WHERE email = ?";
+    // Check user credentials
+    $sql = "SELECT id, password, user_type FROM users WHERE email = ?";
     $stmt = $conn->prepare($sql);
     if ($stmt) {
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $stmt->store_result();
 
-        // Check if a user with this email exists
         if ($stmt->num_rows > 0) {
-            $stmt->bind_result($user_id, $hashed_password);
+            $stmt->bind_result($user_id, $hashed_password, $db_user_type);
             $stmt->fetch();
 
-            // Verify the password
             if (password_verify($password, $hashed_password)) {
-                // Start a session and store user ID
+                // Store session data
                 $_SESSION["user_id"] = $user_id;
+                $_SESSION["user_type"] = $db_user_type;
 
-                // Redirect to the home page or dashboard
-                header("Location: Home.php");
+                // Redirect to the appropriate dashboard
+                if ($db_user_type === "admin") {
+                    header("Location: admin.php");
+                } elseif ($db_user_type === "customer") {
+                    header("Location: Home.php");
+                } elseif ($db_user_type === "seller") {
+                    header("Location: sellerseller.php");
+                }
                 exit();
             } else {
-                // Incorrect password
                 header("Location: login.php?error=Invalid email or password");
                 exit();
             }
         } else {
-            // Email not found
             header("Location: login.php?error=Invalid email or password");
             exit();
         }
 
         $stmt->close();
     } else {
-        header("Location: login.php?error=Failed to prepare statement");
+        header("Location: login.php?error=Database error. Please try again.");
+        exit();
     }
 }
 
