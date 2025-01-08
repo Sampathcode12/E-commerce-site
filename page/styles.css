@@ -127,54 +127,50 @@ body {
 
 /* Notification Styling */
 .notification {
-    position: fixed; /* Ensures it stays in one spot */
-    top: 0;          /* Aligns it to the top of the page */
+    display: none; /* Initially hidden */
+    position: fixed;
+    top: 0;
     left: 0;
-    width: 100%;     /* Takes up full width */
-    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+    width: 100%;
+    background: rgba(0, 0, 0, 0.8);
     color: white;
-    padding: 1rem;
-    z-index: 1000;   /* Places it above the header */
-    display: none;   /* Hidden by default */
-}
-
-.notification-content {
+    z-index: 1000;
+    padding: 20px;
     text-align: center;
 }
 
-.header {
-    position: relative;
-    z-index: 10; /* Ensure header is beneath the notification */
+.notification-content {
+    max-width: 500px;
+    margin: 0 auto;
+    background: #fff;
+    color: #333;
+    padding: 20px;
+    border-radius: 8px;
 }
 
-.notification .btn {
-    background-color: white;
-    color: #ff5722;
-    border: none;
+.btn {
+    margin: 10px;
     padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.notification .btn:hover {
-    background-color: #ff7043;
-    color: white;
-}
-
-.notification .close-btn {
-    background-color: transparent;
+    background: #007BFF;
     color: white;
     border: none;
-    font-size: 20px;
+    border-radius: 5px;
     cursor: pointer;
-    position: absolute;
-    top: 50px;
-    right: 20px;
 }
 
-.notification .close-btn:hover {
-    color: #ffb74d;
+.btn:hover {
+    background: #0056b3;
 }
+
+.close-btn {
+    background: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
 
 
 body {

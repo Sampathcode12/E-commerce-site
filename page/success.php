@@ -10,7 +10,7 @@
     <div class="success-container">
         <h1>Success</h1>
         <p><?php echo htmlspecialchars($_GET['message']); ?></p>
-        <a href="Home.php" class="btn">Go to Home</a>
+        <a href="main.php" class="btn">Go to Home</a>
     </div>
 </body>
 </html>

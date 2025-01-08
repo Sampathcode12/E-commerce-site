@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($stmt) {
         $stmt->bind_param("issss", $user_id, $first_name, $last_name, $phone, $address);
         if ($stmt->execute()) {
-            header("Location: success.php?message=User information saved successfully");
+            header("Location: Home.php?message=User information saved successfully");
             exit();
         } else {
             header("Location: user_info.php?user_id=" . $user_id . "&error=Failed to save information");
