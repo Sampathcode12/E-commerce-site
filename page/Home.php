@@ -1,3 +1,12 @@
+
+<?php
+session_start();
+if (!isset($_SESSION["user_id"])) {
+    header("Location: login.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,7 +40,7 @@
     </div>
     <!-- Customer Account Icon -->
     <div class="account">
-        <a href="account.html">
+        <a href="account.php">
             <i class="fas fa-user-circle"></i>
         </a>
     </div>

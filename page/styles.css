@@ -299,3 +299,211 @@ button:hover {
     text-align: center;
     margin-bottom: 15px;
 }
+
+
+
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+}
+
+/* Header Styles */
+.header {
+    background-color: #007bff;
+    color: white;
+    padding: 5px;
+    text-align: center;
+}
+
+.header h1 {
+    margin: 0;
+}
+
+.btn-logout {
+    background-color: red;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-logout:hover {
+    background-color: darkred;
+}
+
+/* Account Container Styles */
+.account-container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Profile Section Styles */
+.profile {
+    margin-bottom: 30px;
+}
+
+.profile h2 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.profile p {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.profile a.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.profile a.btn:hover {
+    background-color: #0056b3;
+}
+
+/* Account Management Section Styles */
+.account-management {
+    margin-bottom: 30px;
+}
+
+.account-management h2 {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.account-management .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.account-management .btn:hover {
+    background-color: #218838;
+}
+
+/* Order History Section Styles */
+.order-history {
+    margin-bottom: 30px;
+}
+
+.order-history h2 {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.order-history p {
+    font-size: 16px;
+    color: #777;
+}
+
+/* Bank Details Section Styles */
+.bank-details {
+    margin-bottom: 30px;
+}
+
+.bank-details h2 {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.bank-details p {
+    font-size: 16px;
+    color: #777;
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+form label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+form input, form select, form button {
+    margin-bottom: 10px;
+    padding: 8px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+form button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #45a049;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+form label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+form input, form select, form button {
+    margin-bottom: 10px;
+    padding: 8px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+form button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #45a049;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+}
