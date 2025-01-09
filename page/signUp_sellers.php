@@ -1,38 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
 
 <?php
-// Connect to the database
-include 'Database.php'; // Ensure this file contains your database connection logic
+// Include database connection
+require_once 'Database.php'; // Adjust the path to your database connection file
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Get form data
-    $seller_name = $_POST['seller_name'];
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hash the password for security
-    $seller_email = $_POST['seller_email'];
-    $business_name = $_POST['business_name'];
-    $business_email = $_POST['business_email'];
+session_start();
 
-    // Insert seller data into the database
-    $sql = "INSERT INTO seller (seller_name, password, seller_email, business_name, business_email) 
-            VALUES (?, ?, ?, ?, ?)";
-    
-    $stmt = $conn->prepare($sql);
-    if ($stmt) {
-        $stmt->bind_param("sssss", $seller_name, $password, $seller_email, $business_name, $business_email);
-        if ($stmt->execute()) {
-            // Redirect to the bank information form after successful insertion
-            header("Location: bank_information_form.php?seller_id=" . $conn->insert_id);
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    // Check if user is logged in
+    $userId = $_SESSION['user_id'] ?? null;
+
+    if (!$userId) {
+        header("Location: login.php?error=You must log in to register as a seller.");
+        exit();
+    }
+
+    // Sanitize and validate inputs
+    $seller_name = htmlspecialchars($_POST['seller_name']);
+    $password = $_POST['password'];
+    $seller_email = filter_var($_POST['seller_email'], FILTER_SANITIZE_EMAIL);
+    $business_name = htmlspecialchars($_POST['business_name']);
+    $business_email = filter_var($_POST['business_email'], FILTER_SANITIZE_EMAIL);
+
+    if (!filter_var($seller_email, FILTER_VALIDATE_EMAIL) || !filter_var($business_email, FILTER_VALIDATE_EMAIL)) {
+        header("Location: signUp_sellers.php?error=Invalid email format.");
+        exit();
+    }
+
+    // Hash the password
+    $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+
+    // Start a transaction
+    if ($conn) {
+        $conn->begin_transaction();
+        try {
+            // Step 1: Update the `users` table to change `user_type` to 'seller'
+            $updateQuery = "UPDATE users SET user_type = 'seller' WHERE id = ?";
+            $stmt = $conn->prepare($updateQuery);
+            $stmt->bind_param("i", $userId);
+            $stmt->execute();
+
+            // Step 2: Insert the seller-specific data into the `seller` table
+            $insertQuery = "INSERT INTO seller (seller_id, seller_name, password, seller_email, business_name, business_email) VALUES (?, ?, ?, ?, ?, ?)";
+            $stmt = $conn->prepare($insertQuery);
+            $stmt->bind_param("isssss", $userId, $seller_name, $hashedPassword, $seller_email, $business_name, $business_email);
+            $stmt->execute();
+
+            // Commit the transaction
+            $conn->commit();
+
+            // Redirect to seller dashboard
+            header("Location: seller.php");
             exit();
-        } else {
-            // Handle database insertion error
-            header("Location: signup_form.php?error=Failed to register seller");
+        } catch (Exception $e) {
+            // Roll back the transaction if any error occurs
+            $conn->rollback();
+            header("Location: signUp_sellers.php?error=" . urlencode("Failed to register as a seller. Please try again."));
             exit();
         }
     } else {
-        // Handle statement preparation error
-        header("Location: signup_form.php?error=Database error");
+        header("Location: signUp_sellers.php?error=Database connection failed.");
         exit();
     }
 }
@@ -40,6 +66,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seller Registration</title>
@@ -48,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <div class="signup-container">
         <h1>Register as a Seller</h1>
-        <!-- Display error messages if present -->
+        <!-- Display error messages -->
         <?php
         if (isset($_GET['error'])) {
             echo '<p class="error">' . htmlspecialchars($_GET['error']) . '</p>';

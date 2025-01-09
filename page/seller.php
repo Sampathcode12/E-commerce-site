@@ -5,7 +5,7 @@ session_start(); // Start a session to manage user login
 $host = "localhost";
 $user = "root";
 $password = "";
-$database = "seller_panel";
+$database = "ecommerce";
 $conn = new mysqli($host, $user, $password, $database);
 
 if ($conn->connect_error) {
