@@ -1,4 +1,6 @@
 <?php
+
+
 session_start(); // Start a session to manage user login
 
 // Database connection
@@ -14,7 +16,7 @@ if ($conn->connect_error) {
 
 // Check if the seller is logged in
 if (!isset($_SESSION['seller_id'])) {
-    header("Location: login.php"); // Redirect to login page
+    header("Location: seller_login.php"); // Redirect to login page
     exit();
 }
 
@@ -31,17 +33,22 @@ $seller_id = $_SESSION['seller_id'];
     <link rel="stylesheet" href="styles.css"> <!-- Include your styles here -->
 </head>
 <body>
-    <header>
+    <header class="header">
         <h1>Welcome to Seller Panel</h1>
-        <nav>
-            <a href="dashboard.php">Dashboard</a>
-            <a href="profile.php">Profile</a>
-            <a href="products.php">Products</a>
-            <a href="orders.php">Orders</a>
-            <a href="logout.php">Logout</a>
-        </nav>
-    </header>
+        
+        <nav class="navbar">
+        <ul>
+            <li><a href="dashboard.php">Dashboard</a></li>
+            <li><a href="Shop.php">Profile</a></li>
+            <li><a href="Categories.php">Products</a></li>
+            <li><a href="Contact.php">Orders</a></li>
+            <li><a href="home.php">Home</a></li>
+           
 
+        </ul>
+    </nav>
+    </header>
+<!-- 
     <main>
         <section id="dashboard">
             <h2>Dashboard</h2>
@@ -134,6 +141,6 @@ $seller_id = $_SESSION['seller_id'];
 
     <footer>
         <p>&copy; 2025 Your Website Name</p>
-    </footer>
+    </footer> -->
 </body>
 </html>
