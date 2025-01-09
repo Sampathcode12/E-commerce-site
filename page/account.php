@@ -94,7 +94,7 @@
             <?php if ($user["user_type"] === "seller"): ?>
                 <a href="seller.php" class="btn">Go to Seller Account</a>
             <?php elseif ($user["user_type"] === "customer"): ?>
-                <a href="register_seller_form.php" class="btn">Create a Seller Account</a>
+                <a href="signUp_sellers.php" class="btn">Create a Seller Account</a>
             <?php endif; ?>
         </section>
         <!-- Conditional Buttons -->
