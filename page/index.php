@@ -43,9 +43,8 @@
 
             // Close the notification and redirect to the home page
             closeBtn.addEventListener("click", function () {
-               // notification.style.display = "none";
-                window.location.href = "Home.php";
-            });
+        window.location.href = "home.php";
+    });
         });
     </script>
 </body>
