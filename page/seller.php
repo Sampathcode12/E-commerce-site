@@ -1,5 +1,5 @@
 <?php
-
+include("selle_pannel_hedear.php");
 
 session_start(); // Start a session to manage user login
 
@@ -33,21 +33,7 @@ $seller_id = $_SESSION['seller_id'];
     <link rel="stylesheet" href="styles.css"> <!-- Include your styles here -->
 </head>
 <body>
-    <header class="header">
-        <h1>Welcome to Seller Panel</h1>
-        
-        <nav class="navbar">
-        <ul>
-            <li><a href="dashboard.php">Dashboard</a></li>
-            <li><a href="Shop.php">Profile</a></li>
-            <li><a href="Categories.php">Products</a></li>
-            <li><a href="Contact.php">Orders</a></li>
-            <li><a href="home.php">Home</a></li>
-           
-
-        </ul>
-    </nav>
-    </header>
+  
 <!-- 
     <main>
         <section id="dashboard">
@@ -142,5 +128,8 @@ $seller_id = $_SESSION['seller_id'];
     <footer>
         <p>&copy; 2025 Your Website Name</p>
     </footer> -->
+
+
+   
 </body>
 </html>
