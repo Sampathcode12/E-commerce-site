@@ -622,3 +622,148 @@ h1 {
 }
 
 
+/* // home */
+
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.product-item {
+    border: 1px solid #ddd;
+    padding: 15px;
+    width: 250px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.product-item:hover {
+    transform: scale(1.05);
+}
+
+.product-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.product-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.product-category, .product-price {
+    font-size: 14px;
+    color: #555;
+}
+
+.product-description {
+    font-size: 12px;
+    color: #777;
+    margin-top: 10px;
+}
+
+.view-button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.view-button:hover {
+    background-color: #218838;
+}
+
+/* Product List Container */
+.product-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    justify-items: center;
+}
+
+/* Individual Product Item */
+.product-item {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 100%;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Hover Effect for Product Item */
+.product-item:hover {
+    transform: scale(1.05);
+}
+
+/* Product Image */
+.product-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Product Details */
+.product-details {
+    padding: 15px;
+    text-align: center;
+}
+
+.product-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.product-category {
+    font-size: 14px;
+    color: #555;
+}
+
+.product-price {
+    font-size: 16px;
+    color: #000;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.product-description {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+/* Button to View Details */
+.view-button {
+    background-color: #0074D9;
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+/* Hover Effect for View Button */
+.view-button:hover {
+    background-color: #005bb5;
+}
+
+/* Styling for No Products Available */
+p {
+    text-align: center;
+    font-size: 18px;
+    color: #888;
+}

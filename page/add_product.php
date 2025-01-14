@@ -3,6 +3,12 @@
 include("selle_pannel_hedear.php");
 include("Database.php");
 
+session_start();
+if (!isset($_SESSION['seller_id'])) {
+    header("Location: seller_login.php"); // Redirect to login page
+    exit();
+}
+
 ?>
 
 <?php

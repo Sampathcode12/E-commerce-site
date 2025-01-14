@@ -21,7 +21,10 @@ include 'header.php';
    
 
 
-
+    <!-- Floating Action Button (Quick Add Item) -->
+    <div class="floating-button">
+        <button onclick="window.location.href='add_product.php'">+</button>
+    </div>
 
     <!-- Main Page Content -->
    

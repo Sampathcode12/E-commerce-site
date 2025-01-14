@@ -23,7 +23,8 @@ $seller_id = $_SESSION['seller_id'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seller Panel</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Include your styles here -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">!-- Include your styles here -->
 </head>
 <body>
 
@@ -31,6 +32,6 @@ $seller_id = $_SESSION['seller_id'];
 <div class="floating-button">
         <button onclick="window.location.href='add_product.php'">+</button>
     </div>
-    
+
 </body>
 </html>
