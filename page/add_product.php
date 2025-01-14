@@ -1,7 +1,40 @@
 
 <?php
 include("selle_pannel_hedear.php");
+include("Database.php");
 
+?>
+
+<?php
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_product'])) {
+    $name = $_POST['name'];
+    $category = $_POST['category'];
+    $sub_category = $_POST['sub-category'];
+    $price = $_POST['price'];
+    $description = $_POST['description'];
+
+    // Handle file upload
+    $target_dir = "uploads/";
+    $image_path = $target_dir . basename($_FILES["image"]["name"]);
+    if (move_uploaded_file($_FILES["image"]["tmp_name"], $image_path)) {
+        // Insert data into the database
+        $sql = "INSERT INTO products (name, category, sub_category, price, image_path, description) VALUES (?, ?, ?, ?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ssssss", $name, $category, $sub_category, $price, $image_path, $description);
+
+        if ($stmt->execute()) {
+            echo "<p style='color: green;'>Product added successfully!</p>";
+        } else {
+            echo "<p style='color: red;'>Error adding product: " . $conn->error . "</p>";
+        }
+
+        $stmt->close();
+    } else {
+        echo "<p style='color: red;'>Error uploading image.</p>";
+    }
+}
 
 ?>
 <!DOCTYPE html>
@@ -48,7 +81,7 @@ include("selle_pannel_hedear.php");
         <section class="product-section">
             <div class="section-container">
                 <h2 class="form-title">Add Product</h2>
-                <form method="POST" enctype="multipart/form-data" class="product-form">
+                <form action="add_product.php" method="POST" enctype="multipart/form-data" class="product-form">
                     <!-- Product Name -->
                     <label for="name" class="form-label">Product Name:</label>
                     <input type="text" id="name" name="name" class="form-input" placeholder="Enter product name" required>
