@@ -1,5 +1,8 @@
+
 <?php
 include("selle_pannel_hedear.php");
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,39 +11,83 @@ include("selle_pannel_hedear.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Panel</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script>
+        // JavaScript to update sub-categories based on selected category
+        function updateSubCategories() {
+            const subCategory = document.getElementById("sub-category");
+            const category = document.getElementById("category").value;
+
+            // Clear existing sub-categories
+            subCategory.innerHTML = '<option value="" disabled selected>Select sub-category</option>';
+
+            // Define sub-categories for each category
+            const subCategories = {
+                electronics: ["Mobile Phones", "Laptops", "Cameras", "Accessories"],
+                fashion: ["Men's Clothing", "Women's Clothing", "Footwear", "Accessories"],
+                "home-appliances": ["Kitchen Appliances", "Cleaning Appliances", "Air Conditioners"],
+                books: ["Fiction", "Non-Fiction", "Educational", "Comics"],
+                others: ["Miscellaneous"]
+            };
+
+            // Populate sub-category dropdown
+            if (subCategories[category]) {
+                subCategories[category].forEach((sub) => {
+                    const option = document.createElement("option");
+                    option.value = sub.toLowerCase().replace(/\s+/g, "-");
+                    option.textContent = sub;
+                    subCategory.appendChild(option);
+                });
+            }
+        }
+    </script>
 </head>
-
+<div style="padding: 5%;">
 <body>
-    <header>
-        <h1>Product Panel</h1>
-    </header>
-
     <main>
-        <section>
-            <h2>Add Product</h2>
-            <form method="POST">
-                <label for="name">Product Name:</label>
-                <input type="text" id="name" name="name" placeholder="Product Name" required>
+        <section class="product-section">
+            <div class="section-container">
+                <h2 class="form-title">Add Product</h2>
+                <form method="POST" enctype="multipart/form-data" class="product-form">
+                    <!-- Product Name -->
+                    <label for="name" class="form-label">Product Name:</label>
+                    <input type="text" id="name" name="name" class="form-input" placeholder="Enter product name" required>
 
-                <label for="category">Category:</label>
-                <input type="text" id="category" name="category" placeholder="Category" required>
+                    <!-- Select Category -->
+                    <label for="category" class="form-label">Select Category:</label>
+                    <select id="category" name="category" class="form-input" onchange="updateSubCategories()" required>
+                        <option value="" disabled selected>Choose a category</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="fashion">Fashion</option>
+                        <option value="home-appliances">Home Appliances</option>
+                        <option value="books">Books</option>
+                        <option value="others">Others</option>
+                    </select>
 
-                <label for="price">Price:</label>
-                <input type="number" id="price" step="0.01" name="price" placeholder="Price" required>
+                    <!-- Sub-Category -->
+                    <label for="sub-category" class="form-label">Select Sub-Category:</label>
+                    <select id="sub-category" name="sub-category" class="form-input" required>
+                        <option value="" disabled selected>Select sub-category</option>
+                    </select>
 
-                <label for="stock">Stock:</label>
-                <input type="number" id="stock" name="stock" placeholder="Stock" required>
+                    <!-- Price -->
+                    <label for="price" class="form-label">Price:</label>
+                    <input type="number" id="price" name="price" step="0.01" class="form-input" placeholder="Enter price" required>
 
-                <button type="submit" name="add_product">Add Product</button>
-            </form>
+                    <!-- Image -->
+                    <label for="image" class="form-label">Upload Image:</label>
+                    <input type="file" id="image" name="image" class="form-input" accept="image/*" required>
+
+                    <!-- Description -->
+                    <label for="description" class="form-label">Description:</label>
+                    <textarea id="description" name="description" class="form-input" placeholder="Enter product description" rows="4" required></textarea>
+
+                    <!-- Submit Button -->
+                    <button type="submit" name="add_product" class="form-button">Add Product</button>
+                </form>
+            </div>
         </section>
     </main>
-
-    <footer>
-        <p>&copy; 2025 Product Panel. All Rights Reserved.</p>
-    </footer>
 </body>
-
+</div>
 </html>
