@@ -1,5 +1,7 @@
+
 <?php
 include("Database.php");
+include("header.php");
 
 // Fetch products from the database
 $sql = "SELECT id, name, category, price, image_path, description FROM products";
@@ -9,10 +11,16 @@ $result = $conn->query($sql);
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Display</title>
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+
+    
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -128,3 +136,24 @@ $result = $conn->query($sql);
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
