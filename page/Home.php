@@ -19,6 +19,7 @@ $result = $conn->query($sql);
     <!-- Font Awesome for icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="home.css">
+    <script src="script.js" defer></script>
     
 
 </head>

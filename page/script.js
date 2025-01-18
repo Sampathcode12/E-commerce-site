@@ -19,3 +19,19 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location.href = "php/home.php";
     });
 });
+
+
+
+
+document.getElementById('product_ID').addEventListener('blur', function() {
+    const productID = this.value;
+
+    fetch(`check_product_id.php?product_ID=${productID}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.exists) {
+                alert('Product ID already exists. Please use a different ID.');
+                this.value = ''; // Clear the input field
+            }
+        });
+});

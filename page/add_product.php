@@ -13,34 +13,55 @@ if (!isset($_SESSION['seller_id'])) {
 
 <?php
 
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_product'])) {
-    $name = $_POST['name'];
-    $category = $_POST['category'];
-    $sub_category = $_POST['sub-category'];
-    $price = $_POST['price'];
-    $description = $_POST['description'];
+    $name = htmlspecialchars($_POST['name']);
+    $product_id = htmlspecialchars($_POST['product_ID']);
+    $category = htmlspecialchars($_POST['category']);
+    $sub_category = htmlspecialchars($_POST['sub-category']);
+    $price = floatval($_POST['price']);
+    $description = htmlspecialchars($_POST['description']);
 
-    // Handle file upload
-    $target_dir = "uploads/";
-    $image_path = $target_dir . basename($_FILES["image"]["name"]);
-    if (move_uploaded_file($_FILES["image"]["tmp_name"], $image_path)) {
-        // Insert data into the database
-        $sql = "INSERT INTO products (name, category, sub_category, price, image_path, description) VALUES (?, ?, ?, ?, ?, ?)";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssssss", $name, $category, $sub_category, $price, $image_path, $description);
+    // Check if product_ID already exists
+    $check_sql = "SELECT COUNT(*) AS count FROM products WHERE product_ID = ?";
+    $check_stmt = $conn->prepare($check_sql);
+    $check_stmt->bind_param("s", $product_id);
+    $check_stmt->execute();
+    $result = $check_stmt->get_result();
+    $row = $result->fetch_assoc();
 
-        if ($stmt->execute()) {
-            echo "<p style='color: green;'>Product added successfully!</p>";
-        } else {
-            echo "<p style='color: red;'>Error adding product: " . $conn->error . "</p>";
-        }
-
-        $stmt->close();
+    if ($row['count'] > 0) {
+        echo "<p style='color: red;'>Product ID already exists. Please use a different ID.</p>";
     } else {
-        echo "<p style='color: red;'>Error uploading image.</p>";
+        // Handle file upload
+        $target_dir = "uploads/";
+        $image_path = $target_dir . basename($_FILES["image"]["name"]);
+
+        $allowed_types = ['image/jpeg', 'image/png', 'image/gif'];
+        if (in_array($_FILES['image']['type'], $allowed_types) && $_FILES['image']['size'] <= 2 * 1024 * 1024) {
+            if (move_uploaded_file($_FILES["image"]["tmp_name"], $image_path)) {
+                $sql = "INSERT INTO products (name, product_ID, category, sub_category, price, image_path, description) 
+                        VALUES (?, ?, ?, ?, ?, ?, ?)";
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("sssssss", $name, $product_id, $category, $sub_category, $price, $image_path, $description);
+
+                if ($stmt->execute()) {
+                    echo "<p style='color: green;'>Product added successfully!</p>";
+                } else {
+                    echo "<p style='color: red;'>Error adding product: " . $conn->error . "</p>";
+                }
+
+                $stmt->close();
+            } else {
+                echo "<p style='color: red;'>Error uploading image.</p>";
+            }
+        } else {
+            echo "<p style='color: red;'>Invalid file type or file size exceeds 2MB.</p>";
+        }
     }
+
+    $check_stmt->close();
 }
+
 
 ?>
 <!DOCTYPE html>
@@ -52,6 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_product'])) {
     <title>Product Panel</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="add_product.css">
+    <script src="script.js" defer></script>
     <script>
         // JavaScript to update sub-categories based on selected category
         function updateSubCategories() {
@@ -93,6 +115,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_product'])) {
                     <label for="name" class="form-label">Product Name:</label>
                     <input type="text" id="name" name="name" class="form-input" placeholder="Enter product name" required>
 
+                    <label for="product_ID" class="form-label">Product ID:</label>
+                    <input type="text" id="product_ID" name="product_ID" class="form-input" placeholder="Enter product ID" required>
+
                     <!-- Select Category -->
                     <label for="category" class="form-label">Select Category:</label>
                     <select id="category" name="category" class="form-input" onchange="updateSubCategories()" required>
@@ -122,6 +147,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_product'])) {
                     <label for="description" class="form-label">Description:</label>
                     <textarea id="description" name="description" class="form-input" placeholder="Enter product description" rows="4" required></textarea>
 
+            
                     <!-- Submit Button -->
                     <button type="submit" name="add_product" class="form-button">Add Product</button>
                 </form>

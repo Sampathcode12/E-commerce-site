@@ -76,6 +76,7 @@ if (!isset($_SESSION["user_id"])) {
 
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
         <link rel="stylesheet" href="acount.css">
+        <script src="script.js" defer></script>
 
     </header>
 
