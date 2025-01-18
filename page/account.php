@@ -9,21 +9,15 @@ if (!isset($_SESSION["user_id"])) {
 ?>
 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Account</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
+
 <body>
+
+
+
+
+
     <?php
-    session_start();
-    if (!isset($_SESSION["user_id"])) {
-        header("Location: login.php");
-        exit();
-    }
+   
 
     // Database connection
     $servername = "localhost";
@@ -78,28 +72,38 @@ if (!isset($_SESSION["user_id"])) {
     <header class="header">
         <h1>User Account</h1>
         <a href="logout.php" class="btn-logout">Logout</a>
+        <a href="home.php" class="btn-home">Home</a>
+
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="acount.css">
+
     </header>
 
     <div class="account-container">
         <!-- Profile Section -->
         <section class="profile">
             <h2>Profile</h2>
-            <p><strong>Name:</strong> <?php echo htmlspecialchars($user["first_name"] . " " . $user["last_name"]); ?></p>
+
+<p><strong>Name:</strong> <?php echo htmlspecialchars($user["first_name"] . " " . $user["last_name"]); ?></p><br>
             
-            <p><strong>Email:</strong> <?php echo htmlspecialchars($user["email"]); ?></p>
-            <p><strong>Phone:</strong> <?php echo htmlspecialchars($user["phone"]); ?></p>
-            <p><strong>Address:</strong> <?php echo htmlspecialchars($user["address"]); ?></p>
-            <p><strong>Age:</strong> <?php echo htmlspecialchars($user["age"]); ?></p>
-            <p><strong>Sex:</strong> <?php echo htmlspecialchars($user["sex"]); ?></p>
-            <p><strong>Interests:</strong> <?php echo htmlspecialchars($user["interests"]); ?></p>
-            <p><strong>User type:</strong> <?php echo htmlspecialchars($user["user_type"]); ?></p>
+            <p><strong>Email:</strong> <?php echo htmlspecialchars($user["email"]); ?></p> <br>
+            <p><strong>Phone:</strong> <?php echo htmlspecialchars($user["phone"]); ?></p><br>
+            <p><strong>Address:</strong> <?php echo htmlspecialchars($user["address"]); ?></p><br>
+            <p><strong>Age:</strong> <?php echo htmlspecialchars($user["age"]); ?></p><br>
+            <p><strong>Sex:</strong> <?php echo htmlspecialchars($user["sex"]); ?></p><br>
+            <p><strong>Interests:</strong> <?php echo htmlspecialchars($user["interests"]); ?></p><br>
+            <p><strong>User type:</strong> <?php echo htmlspecialchars($user["user_type"]); ?></p><br>
+
+
+
+          
             <a href="edit_profile.php" class="btn">Edit Profile</a>
         </section>
 
         <!-- Account Management -->
         <section class="account-management">
             <h2>Account Management</h2>
-            <a href="change_password.php" class="btn">Change Password</a>
+            <a href="change_password.php" class="btn">Change Password</a >
             <a href="change_email.php" class="btn">Change Email</a>
             <a href="Bank_information.php" class="btn">Change Bank Information</a>
             <?php if ($user["user_type"] === "seller"): ?>

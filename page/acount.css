@@ -1,0 +1,164 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+h1, h2 {
+    color: #444;
+}
+
+a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
+.btn-logout {
+    background-color: #dc3545;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+.btn-home {
+    background-color: #35dc7b;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    position: absolute;
+    right: 100px;
+    top: 20px;
+    
+}
+
+/* Container */
+.account-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 60px auto;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+/* Profile Section */
+.profile {
+    margin-bottom: 20px;
+}
+
+.profile h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.profile p {
+    margin: 5px 0;
+}
+
+.btn {
+    display: inline-block;
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.btn:hover {
+    background-color: #5ae383;
+}
+
+/* Account Management */
+.account-management {
+    margin-bottom: 20px;
+}
+    
+
+
+
+.account-management h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    
+}
+
+/* Admin Dashboard */
+.admin-dashboard {
+    margin-bottom: 20px;
+}
+
+.admin-dashboard h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.admin-dashboard p {
+    margin-bottom: 10px;
+}
+
+/* Order History */
+.order-history {
+    margin-bottom: 20px;
+}
+
+.order-history h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.order-history ul {
+    list-style: none;
+    padding: 0;
+}
+
+.order-history li {
+    background-color: #f1f1f1;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Bank Details */
+.bank-details {
+    margin-bottom: 20px;
+}
+
+.bank-details h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header {
+        padding: 15px;
+    }
+
+    .btn-logout {
+        font-size: 12px;
+        padding: 8px 12px;
+    }
+
+    .account-container {
+        padding: 10px;
+    }
+
+    .btn {
+        font-size: 12px;
+        padding: 8px 15px;
+    }
+}
