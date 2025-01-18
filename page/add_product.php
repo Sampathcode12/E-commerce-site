@@ -51,6 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_product'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Panel</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="add_product.css">
     <script>
         // JavaScript to update sub-categories based on selected category
         function updateSubCategories() {

@@ -24,7 +24,9 @@ $seller_id = $_SESSION['seller_id'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seller Panel</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">!-- Include your styles here -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="button.css">
+    <!-- !-- Include your styles here --> -->
 </head>
 <body>
 

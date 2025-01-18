@@ -35,7 +35,8 @@ $result = $conn->query($sql);
                 <?php while ($row = $result->fetch_assoc()) : ?>
                     <div class="product-card">
                         <img src="<?php echo $row['image_path']; ?>" alt="<?php echo $row['name']; ?>" class="product-image">
-                        <div class="product-details">
+                        <a href="buy_now.php?product_id=<?php echo $row['id']; ?>" class="buy-button">Buy Now</a>
+                        <div class="product-details" >
                             <h3 class="product-name"><?php echo $row['name']; ?></h3>
                             <p class="product-category">Category: <?php echo ucfirst($row['category']); ?></p>
                             <p class="product-price">$<?php echo number_format($row['price'], 2); ?></p>
