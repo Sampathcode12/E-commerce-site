@@ -6,17 +6,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Redirect to login page when the "Login" button is clicked
     loginBtn.addEventListener("click", function () {
-        window.location.href = "php/login.php";
+        window.location.href = "login.php";
     });
 
     // Redirect to sign-up page when the "Sign Up" button is clicked
     signupBtn.addEventListener("click", function () {
-        window.location.href = "php/signup.php";
+        window.location.href = "signup.php";
     });
 
     // Redirect to home page when the "Close" button is clicked
     closeBtn.addEventListener("click", function () {
-        window.location.href = "php/home.php";
+        window.location.href = "home.php";
     });
 });
 

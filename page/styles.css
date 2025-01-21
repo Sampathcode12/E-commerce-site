@@ -8,8 +8,66 @@
 /* Body Styling */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
+    background-color: #f8f9fa;
     color: #333;
+    line-height: 1.6;
+}
+
+/* Notification Styles */
+.notification {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px;
+    background-color: #ffc107;
+    text-align: center;
+    z-index: 1000;
+    display: none; /* Hidden by default, shown dynamically */
+    animation: slideDown 0.5s ease forwards;
+}
+
+.notification-content {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.notification-content p {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.btn {
+    margin: 5px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.close-btn {
+    background-color: #ff4d4d;
+    font-size: 14px;
+    padding: 8px 15px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.close-btn:hover {
+    background-color: #cc0000;
 }
 
 /* Header Styling */
@@ -18,12 +76,13 @@ body {
     top: 0;
     width: 100%;
     background-color: #007bff;
-    color: white;
+    color: #fff;
     padding: 10px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .header .logo h1 {
@@ -33,12 +92,12 @@ body {
 .header .navbar ul {
     list-style: none;
     display: flex;
-    gap: 50px;
+    gap: 20px;
 }
 
 .header .navbar ul li a {
     text-decoration: none;
-    color: white;
+    color: #fff;
     font-weight: bold;
     transition: color 0.3s ease;
 }
@@ -47,97 +106,16 @@ body {
     color: #ffdd57;
 }
 
-/* Product Grid */
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-    padding: 20px;
-}
-
-.product-card {
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
-    text-align: center;
-}
-
-.product-card:hover {
-    transform: scale(1.05);
-}
-
-.product-card img {
-    width: 100%;
-    height: auto;
-}
-
-.product-card h3 {
-    font-size: 18px;
-    color: #333;
-    margin: 10px 0;
-}
-
-.product-card .price {
-    color: #e67e22;
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-
-.product-card .add-to-cart {
-    background-color: #28a745;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.product-card .add-to-cart:hover {
-    background-color: #218838;
-}
-
 /* Footer Styling */
 .footer {
     text-align: center;
-    padding: 10px 20px;
+    padding: 15px;
     background-color: #333;
-    color: white;
+    color: #fff;
     font-size: 14px;
 }
 
-/* Buy Button Styling */
-.buy-button {
-    background-color: #28a745; /* Green background */
-    color: white; /* White text */
-    font-size: 16px; /* Text size */
-    font-weight: bold; /* Bold text */
-    padding: 10px 20px; /* Button padding */
-    border: none; /* No border */
-    border-radius: 5px; /* Rounded corners */
-    cursor: pointer; /* Pointer cursor on hover */
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
-}
-
-.buy-button:hover {
-    background-color: #218838; /* Darker green on hover */
-    transform: scale(1.05); /* Slightly enlarge button on hover */
-}
-
-.buy-button:active {
-    background-color: #1e7e34; /* Even darker green when clicked */
-    transform: scale(0.95); /* Slightly shrink button when clicked */
-}
-
-
-
-/* // seller pag */
-
-
-/* Floating Button Styles */
+/* Floating Button Styling */
 .floating-button {
     position: fixed;
     bottom: 20px;
@@ -149,7 +127,7 @@ body {
     width: 60px;
     height: 60px;
     background-color: #007bff;
-    color: white;
+    color: #fff;
     font-size: 28px;
     font-weight: bold;
     border: none;
@@ -172,3 +150,27 @@ body {
     outline: none;
 }
 
+/* Animations */
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header .navbar ul {
+        gap: 10px;
+    }
+
+    .notification-content {
+        padding: 10px;
+    }
+
+    .footer {
+        font-size: 12px;
+    }
+}
