@@ -4,7 +4,7 @@ include("Database.php");
 include("header.php");
 
 // Fetch products from the database
-$sql = "SELECT id, name, category, price, image_path, description FROM products";
+$sql = "SELECT id, name,quantity, category, price, image_path, description FROM products";
 $result = $conn->query($sql);
 ?>
 
@@ -29,9 +29,8 @@ $result = $conn->query($sql);
 </head>
 
 <body>
-    <div class="container">
-        <h1>Products</h1>
-        <div class="product-grid">
+    <di class="container">
+        <h1>Products</h1><div class="product-grid">
     <?php if ($result->num_rows > 0) : ?>
         <?php while ($row = $result->fetch_assoc()) : ?>
             <div class="product-card">
@@ -41,7 +40,7 @@ $result = $conn->query($sql);
                     <p class="product-category">Category: <?php echo ucfirst($row['category']); ?></p>
                     <p class="product-price">$<?php echo number_format($row['price'], 2); ?></p>
                     <p class="product-description"><?php echo substr($row['description'], 0, 50) . '...'; ?></p>
-                    <a href="buy_now.php?product_id=<?php echo $row['id']; ?>" class="buy-button">Buy Now</a>
+                    <a href="buy.php?product_id=<?php echo $row['id']; ?>" class="buy-button">Buy Now</a>
                 </div>
             </div>
         <?php endwhile; ?>
@@ -50,8 +49,6 @@ $result = $conn->query($sql);
     <?php endif; ?>
 </div>
 
-
-    </div>
 </body>
 
 </html>
