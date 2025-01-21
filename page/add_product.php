@@ -15,6 +15,7 @@ if (!isset($_SESSION['seller_id'])) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_product'])) {
     $name = htmlspecialchars($_POST['name']);
+    $product_quantity = htmlspecialchars($_POST['quantity']);
     $product_id = htmlspecialchars($_POST['product_ID']);
     $category = htmlspecialchars($_POST['category']);
     $sub_category = htmlspecialchars($_POST['sub-category']);
@@ -39,10 +40,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_product'])) {
         $allowed_types = ['image/jpeg', 'image/png', 'image/gif'];
         if (in_array($_FILES['image']['type'], $allowed_types) && $_FILES['image']['size'] <= 2 * 1024 * 1024) {
             if (move_uploaded_file($_FILES["image"]["tmp_name"], $image_path)) {
-                $sql = "INSERT INTO products (name, product_ID, category, sub_category, price, image_path, description) 
-                        VALUES (?, ?, ?, ?, ?, ?, ?)";
+                $sql = "INSERT INTO products (name,quantity, product_ID, category, sub_category, price, image_path, description) 
+                        VALUES (?, ?, ?, ?, ?, ?, ?,?)";
                 $stmt = $conn->prepare($sql);
-                $stmt->bind_param("sssssss", $name, $product_id, $category, $sub_category, $price, $image_path, $description);
+                $stmt->bind_param("ssssssss", $name, $product_quantity, $product_id, $category, $sub_category, $price, $image_path, $description);
 
                 if ($stmt->execute()) {
                     echo "<p style='color: green;'>Product added successfully!</p>";
@@ -114,6 +115,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_product'])) {
                     <!-- Product Name -->
                     <label for="name" class="form-label">Product Name:</label>
                     <input type="text" id="name" name="name" class="form-input" placeholder="Enter product name" required>
+
+                    <label for="quantity" class="form-label">Product quantity:</label>
+                    <input type="text" id="quantity" name="quantity" class="form-input" placeholder="Enter product quantity" required>
 
                     <label for="product_ID" class="form-label">Product ID:</label>
                     <input type="text" id="product_ID" name="product_ID" class="form-input" placeholder="Enter product ID" required>
