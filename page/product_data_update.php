@@ -79,6 +79,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_product'])) {
     <title>Product Panel</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="add_product.css">
+    <link rel="stylesheet" href="produc_update.css">
+
     <script src="script.js" defer></script>
     <script>
         // JavaScript to update sub-categories based on selected category
