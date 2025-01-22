@@ -46,23 +46,48 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Calculate total price
     $total_price = $quantity * $price_per_item;
 
-    // Insert order into the database
-    $order_sql = "INSERT INTO orders (user_id, product_id, quantity, total_price, payment_method, order_date) 
-                  VALUES (?, ?, ?, ?, ?, NOW())";
-    $order_stmt = $conn->prepare($order_sql);
-    $order_stmt->bind_param("iiids", $user_id, $product_id, $quantity, $total_price, $payment_method);
+    // Display payment operation based on the selected payment method
+    echo "<h1>Payment Method: " . htmlspecialchars(ucfirst($payment_method)) . "</h1>";
+    echo "<p>Total Price: $" . number_format($total_price, 2) . "</p>";
 
-    if ($order_stmt->execute()) {
-        // Update product stock
-        $new_quantity = $available_quantity - $quantity;
-        $update_stock_sql = "UPDATE products SET quantity = ? WHERE id = ?";
-        $update_stock_stmt = $conn->prepare($update_stock_sql);
-        $update_stock_stmt->bind_param("ii", $new_quantity, $product_id);
-        $update_stock_stmt->execute();
-
-        echo "Order placed successfully!";
+    if ($payment_method === "credit_card") {
+        // Credit card payment form
+        echo '
+            <form action="process_payment.php" method="POST">
+                <input type="hidden" name="product_id" value="' . $product_id . '">
+                <input type="hidden" name="quantity" value="' . $quantity . '">
+                <input type="hidden" name="total_price" value="' . $total_price . '">
+                <label for="cc_number">Credit Card Number:</label>
+                <input type="text" id="cc_number" name="cc_number" required>
+                <label for="cc_expiry">Expiry Date:</label>
+                <input type="text" id="cc_expiry" name="cc_expiry" required>
+                <label for="cc_cvv">CVV:</label>
+                <input type="text" id="cc_cvv" name="cc_cvv" required>
+                <button type="submit">Pay Now</button>
+            </form>
+        ';
+    } elseif ($payment_method === "paypal") {
+        // PayPal payment button
+        echo '
+            <p>Click the button below to proceed with PayPal payment:</p>
+            <form action="https://www.paypal.com/checkout" method="POST">
+                <input type="hidden" name="product_id" value="' . $product_id . '">
+                <input type="hidden" name="quantity" value="' . $quantity . '">
+                <input type="hidden" name="total_price" value="' . $total_price . '">
+                <button type="submit">Pay with PayPal</button>
+            </form>
+        ';
+    } elseif ($payment_method === "bank_transfer") {
+        // Bank transfer instructions
+        echo '
+            <p>Please transfer the total amount of $' . number_format($total_price, 2) . ' to the following bank account:</p>
+            <p>Bank: ABC Bank</p>
+            <p>Account Number: 123456789</p>
+            <p>IFSC Code: ABCD0123456</p>
+            <p>Once the transfer is complete, please email the receipt to support@example.com.</p>
+        ';
     } else {
-        echo "Failed to place the order. Please try again.";
+        echo "<p>Invalid payment method.</p>";
     }
 } else {
     echo "Invalid request.";
