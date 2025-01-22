@@ -1,6 +1,14 @@
 <?php
 include("Database.php"); // Include the database connection
 
+
+
+session_start();
+if (!isset($_SESSION["user_id"])) {
+    header("Location: login.php");
+    exit();
+}
+
 // Check if product_id is provided in the URL
 if (isset($_GET['product_id'])) {
     $product_id = intval($_GET['product_id']);
