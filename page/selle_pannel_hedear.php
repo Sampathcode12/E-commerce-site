@@ -7,7 +7,7 @@
             <li><a href="seller_profile.php">Profile</a></li>
             <li><a href="orders.php">Orders</a></li>
             <li><a href="Contact.php">contct</a></li>
-            <li><a href="#">product</a></li>
+            <li><a href="product_data_update.php">product</a></li>
             <li><a href="seller.php">Home</a></li>
            
 
