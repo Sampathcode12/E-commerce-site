@@ -47,6 +47,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $total_price = $quantity * $price_per_item;
 
     // Display payment operation based on the selected payment method
+    echo "<!DOCTYPE html>";
+    echo "<html lang='en'>";
+    echo "<head>";
+    echo "<meta charset='UTF-8'>";
+    echo "<meta name='viewport' content='width=device-width, initial-scale=1.0'>";
+    echo "<title>Payment Page</title>";
+    echo "<link rel='stylesheet' href='payment_page.css'>";
+    echo "</head>";
+    echo "<body>";
+    echo "<div class='product-detail-container'>";
     echo "<h1>Payment Method: " . htmlspecialchars(ucfirst($payment_method)) . "</h1>";
     echo "<p>Total Price: $" . number_format($total_price, 2) . "</p>";
 
@@ -89,8 +99,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     } else {
         echo "<p>Invalid payment method.</p>";
     }
+    echo '</div>';
+    echo '</body>';
+    echo '</html>';
 } else {
     echo "Invalid request.";
     exit();
 }
+
 ?>
