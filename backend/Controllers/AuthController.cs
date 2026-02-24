@@ -13,11 +13,13 @@ public class AuthController : ControllerBase
 {
     private readonly AppDbContext _db;
     private readonly ITokenService _tokenService;
+    private readonly IUserRegistrationService _userRegistrationService;
 
-    public AuthController(AppDbContext db, ITokenService tokenService)
+    public AuthController(AppDbContext db, ITokenService tokenService, IUserRegistrationService userRegistrationService)
     {
         _db = db;
         _tokenService = tokenService;
+        _userRegistrationService = userRegistrationService;
     }
 
     [HttpPost("login")]
@@ -59,41 +61,27 @@ public class AuthController : ControllerBase
     }
 
     [HttpPost("register")]
-    public async Task<ActionResult<LoginResponse>> Register([FromBody] RegisterRequest req)
+    public async Task<ActionResult<UserRegistrationResponse>> Register([FromBody] UserRegistrationRequest req)
     {
         if (string.IsNullOrWhiteSpace(req.Email) || string.IsNullOrWhiteSpace(req.Password) ||
             string.IsNullOrWhiteSpace(req.FirstName) || string.IsNullOrWhiteSpace(req.LastName))
             return BadRequest("Required fields: FirstName, LastName, Email, Password.");
 
-        if (await _db.Users.AnyAsync(u => u.Email == req.Email))
-            return BadRequest("Email already exists.");
-
-        var user = new User
+        try
         {
-            FirstName = req.FirstName,
-            LastName = req.LastName,
-            Email = req.Email,
-            PasswordHash = BCrypt.Net.BCrypt.HashPassword(req.Password),
-            Phone = req.Phone,
-            Address = req.Address,
-            Age = req.Age,
-            Sex = req.Sex,
-            Interests = req.Interests,
-            BankAccountNumber = req.BankAccountNumber,
-            BankName = req.BankName,
-            UserType = "customer"
-        };
-
-        _db.Users.Add(user);
-        await _db.SaveChangesAsync();
-
-        var token = _tokenService.GenerateToken(user);
-        return Ok(new LoginResponse
+            var user = await _userRegistrationService.RegisterAsync(req);
+            var token = _tokenService.GenerateToken(user);
+            return Ok(new UserRegistrationResponse
+            {
+                Token = token,
+                UserId = user.Id,
+                Email = user.Email,
+                UserType = user.UserType
+            });
+        }
+        catch (InvalidOperationException ex) when (ex.Message == "Email already exists.")
         {
-            Token = token,
-            UserId = user.Id,
-            Email = user.Email,
-            UserType = user.UserType
-        });
+            return BadRequest(ex.Message);
+        }
     }
 }

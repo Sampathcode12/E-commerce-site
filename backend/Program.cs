@@ -12,9 +12,11 @@ if (string.IsNullOrEmpty(connectionString))
     throw new InvalidOperationException("Connection string 'DefaultConnection' not found in appsettings.json.");
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseSqlServer(connectionString, sql =>
+        sql.MigrationsAssembly(typeof(Program).Assembly.GetName().Name)));
 
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IUserRegistrationService, UserRegistrationService>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
@@ -46,18 +48,28 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// Create database if not exists and apply pending migrations (maintains __EFMigrationsHistory)
+// DB update on startup (same pattern as Clovesis/ApexflowERP): apply pending migrations and update __EFMigrationsHistory.
 using (var scope = app.Services.CreateScope())
 {
-    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
     try
     {
-        db.Database.Migrate();
+        var pending = (await context.Database.GetPendingMigrationsAsync()).ToList();
+        if (pending.Count > 0)
+        {
+            logger.LogInformation("Applying {Count} pending migration(s): {Migrations}", pending.Count, string.Join(", ", pending));
+            await context.Database.MigrateAsync();
+            logger.LogInformation("Migrations applied. Database and __EFMigrationsHistory are updated.");
+        }
+        else
+        {
+            logger.LogInformation("No pending migrations. Database is up to date.");
+        }
     }
     catch (Exception ex)
     {
-        var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
-        logger.LogError(ex, "An error occurred while applying migrations.");
+        logger.LogError(ex, "Failed to apply migrations. Check connection string and that SQL Server is running.");
         throw;
     }
 }

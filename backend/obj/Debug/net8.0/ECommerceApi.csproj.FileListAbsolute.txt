@@ -101,7 +101,6 @@ C:\xampp\htdocs\E-commerce-site\backend\obj\Debug\net8.0\staticwebassets.build.j
 C:\xampp\htdocs\E-commerce-site\backend\obj\Debug\net8.0\staticwebassets.build.json.cache
 C:\xampp\htdocs\E-commerce-site\backend\obj\Debug\net8.0\staticwebassets.development.json
 C:\xampp\htdocs\E-commerce-site\backend\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-C:\xampp\htdocs\E-commerce-site\backend\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\xampp\htdocs\E-commerce-site\backend\obj\Debug\net8.0\ECommerc.880F12AD.Up2Date
 C:\xampp\htdocs\E-commerce-site\backend\obj\Debug\net8.0\ECommerceApi.dll
 C:\xampp\htdocs\E-commerce-site\backend\obj\Debug\net8.0\refint\ECommerceApi.dll

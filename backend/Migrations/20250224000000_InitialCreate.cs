@@ -11,6 +11,7 @@ namespace ECommerceApi.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            // Users table for user registration (signup) form - used by UserRegistrationRequest DTO
             migrationBuilder.CreateTable(
                 name: "users",
                 columns: table => new

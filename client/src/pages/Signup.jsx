@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { auth } from '../api/client'
-import './Auth.css'
+import './Register.css'
 
 export default function Signup() {
   const navigate = useNavigate()
@@ -48,12 +48,12 @@ export default function Signup() {
   }
 
   return (
-    <div className="auth-page">
-      <div className="auth-card signup-card">
+    <div className="register-page">
+      <div className="register-card">
         <h1>Create account</h1>
-        <p className="auth-subtitle">Sign up to get started</p>
+        <p className="register-subtitle">Sign up to get started</p>
         {error && <div className="alert-error">{error}</div>}
-        <form onSubmit={handleSubmit} className="auth-form">
+        <form onSubmit={handleSubmit} className="register-form">
           <div className="form-row">
             <div className="form-group">
               <label htmlFor="firstName">First name</label>
@@ -106,11 +106,11 @@ export default function Signup() {
             <label htmlFor="bankName">Bank name (optional)</label>
             <input id="bankName" name="bankName" value={form.bankName} onChange={handleChange} />
           </div>
-          <button type="submit" className="btn btn-primary full-width" disabled={loading}>
+          <button type="submit" className="btn-register" disabled={loading}>
             {loading ? 'Creating account...' : 'Sign up'}
           </button>
         </form>
-        <p className="auth-footer">
+        <p className="register-footer">
           Already have an account? <Link to="/login">Sign in</Link>
         </p>
       </div>

@@ -35,13 +35,13 @@
     "Parameters": [
       {
         "Name": "req",
-        "Type": "ECommerceApi.DTOs.RegisterRequest",
+        "Type": "ECommerceApi.DTOs.UserRegistrationRequest",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "ECommerceApi.DTOs.LoginResponse",
+        "Type": "ECommerceApi.DTOs.UserRegistrationResponse",
         "MediaTypes": [
           "text/plain",
           "application/json",

@@ -34,6 +34,7 @@ public class AppDbContext : DbContext
             e.Property(p => p.ProductId).HasColumnName("product_ID");
             e.Property(p => p.ImagePath).HasColumnName("image_path");
             e.Property(p => p.SubCategory).HasColumnName("sub_category");
+            e.Property(p => p.Price).HasPrecision(18, 2);
         });
 
         modelBuilder.Entity<Order>(e =>
@@ -41,7 +42,7 @@ public class AppDbContext : DbContext
             e.ToTable("orders");
             e.Property(o => o.UserId).HasColumnName("user_id");
             e.Property(o => o.ProductId).HasColumnName("product_id");
-            e.Property(o => o.TotalPrice).HasColumnName("total_price");
+            e.Property(o => o.TotalPrice).HasColumnName("total_price").HasPrecision(18, 2);
             e.Property(o => o.PaymentMethod).HasColumnName("payment_method");
             e.Property(o => o.OrderDate).HasColumnName("order_date");
         });
@@ -69,7 +70,7 @@ public class AppDbContext : DbContext
             e.Property(s => s.OrderId).HasColumnName("order_id");
             e.Property(s => s.UserId).HasColumnName("user_id");
             e.Property(s => s.ProductId).HasColumnName("product_id");
-            e.Property(s => s.TotalPrice).HasColumnName("total_price");
+            e.Property(s => s.TotalPrice).HasColumnName("total_price").HasPrecision(18, 2);
             e.Property(s => s.PaymentMethod).HasColumnName("payment_method");
             e.Property(s => s.SellDate).HasColumnName("sell_date");
         });
