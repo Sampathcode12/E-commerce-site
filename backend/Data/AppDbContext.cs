@@ -9,7 +9,6 @@ public class AppDbContext : DbContext
 
     public DbSet<User> Users => Set<User>();
     public DbSet<Product> Products => Set<Product>();
-    public DbSet<Order> Orders => Set<Order>();
     public DbSet<Seller> Sellers => Set<Seller>();
     public DbSet<Sell> Sells => Set<Sell>();
 
@@ -35,16 +34,6 @@ public class AppDbContext : DbContext
             e.Property(p => p.ImagePath).HasColumnName("image_path");
             e.Property(p => p.SubCategory).HasColumnName("sub_category");
             e.Property(p => p.Price).HasPrecision(18, 2);
-        });
-
-        modelBuilder.Entity<Order>(e =>
-        {
-            e.ToTable("orders");
-            e.Property(o => o.UserId).HasColumnName("user_id");
-            e.Property(o => o.ProductId).HasColumnName("product_id");
-            e.Property(o => o.TotalPrice).HasColumnName("total_price").HasPrecision(18, 2);
-            e.Property(o => o.PaymentMethod).HasColumnName("payment_method");
-            e.Property(o => o.OrderDate).HasColumnName("order_date");
         });
 
         modelBuilder.Entity<Seller>(e =>

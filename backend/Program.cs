@@ -1,4 +1,5 @@
 using System.Text;
+using Microsoft.Data.SqlClient;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -12,8 +13,7 @@ if (string.IsNullOrEmpty(connectionString))
     throw new InvalidOperationException("Connection string 'DefaultConnection' not found in appsettings.json.");
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(connectionString, sql =>
-        sql.MigrationsAssembly(typeof(Program).Assembly.GetName().Name)));
+    options.UseSqlServer(connectionString));
 
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IUserRegistrationService, UserRegistrationService>();
@@ -47,29 +47,23 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
+var logger = app.Services.GetRequiredService<ILogger<Program>>();
 
-// DB update on startup (same pattern as Clovesis/ApexflowERP): apply pending migrations and update __EFMigrationsHistory.
+// Create database and tables from C# model when they don't exist (backend runs without error)
 using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
     try
     {
-        var pending = (await context.Database.GetPendingMigrationsAsync()).ToList();
-        if (pending.Count > 0)
-        {
-            logger.LogInformation("Applying {Count} pending migration(s): {Migrations}", pending.Count, string.Join(", ", pending));
-            await context.Database.MigrateAsync();
-            logger.LogInformation("Migrations applied. Database and __EFMigrationsHistory are updated.");
-        }
+        var created = await context.Database.EnsureCreatedAsync();
+        if (created)
+            logger.LogInformation("Database and tables created.");
         else
-        {
-            logger.LogInformation("No pending migrations. Database is up to date.");
-        }
+            logger.LogInformation("Database already exists.");
     }
     catch (Exception ex)
     {
-        logger.LogError(ex, "Failed to apply migrations. Check connection string and that SQL Server is running.");
+        logger.LogError(ex, "Could not create database. Check SQL Server is running and connection string in appsettings.json.");
         throw;
     }
 }

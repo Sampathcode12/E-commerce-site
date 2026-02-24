@@ -1,6 +1,8 @@
 # How to Add a Migration
 
-EF Core does **not** create migration files automatically when the app runs. You either run a script once or use the CLI.
+**When you add a new migration to the code, the database is updated automatically the next time you run the backend** (F5 or `dotnet run`). The app applies any pending migrations on startup.
+
+EF Core does **not** create migration *files* automatically when the app runs. You add those with the CLI or script below; then running the app applies them to the DB.
 
 ## Option 1: Use the script (easiest)
 
@@ -56,8 +58,11 @@ dotnet tool install --global dotnet-ef
 
 Close and reopen the terminal, then run the migration command again.
 
-## 5. Apply migrations
+## 5. Update the database
 
-- **Option A:** Run the backend (`dotnet run` from the `backend` folder). Migrations apply on startup.
-- **Option B:** Apply from terminal:  
+After adding a migration, update the DB in either way:
+
+- **Option A (recommended):** Run the backend — migrations apply automatically on startup.  
+  From `backend`: `dotnet run`, or press F5 in Visual Studio.
+- **Option B:** Apply from terminal without starting the API:  
   `dotnet ef database update --project backend`
