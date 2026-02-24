@@ -85,6 +85,55 @@ body {
     font-size: 14px;
 }
 
+/* Password show/hide toggle */
+.signup-container .password-input-wrap {
+    position: relative;
+    display: flex;
+}
+
+.signup-container .password-input-wrap input {
+    padding-right: 44px;
+}
+
+.signup-container .password-toggle {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: #64748b;
+    cursor: pointer;
+    border-radius: 0 4px 4px 0;
+    transition: color 0.2s ease, background 0.2s ease;
+}
+
+.signup-container .password-toggle:hover {
+    color: #333;
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.signup-container .password-toggle:focus {
+    outline: none;
+    color: #007bff;
+}
+
+.signup-container .password-toggle .icon-eye-off {
+    display: none;
+}
+
+.signup-container .password-toggle[aria-pressed="true"] .icon-eye {
+    display: none;
+}
+
+.signup-container .password-toggle[aria-pressed="true"] .icon-eye-off {
+    display: block;
+}
+
 .signup-container textarea {
     resize: vertical;
 }
