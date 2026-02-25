@@ -60,12 +60,24 @@ public class AuthController : ControllerBase
         });
     }
 
+    /// <summary>
+    /// User registration (signup). Uses C# DTOs and UserRegistrationService; saves to users table.
+    /// </summary>
     [HttpPost("register")]
     public async Task<ActionResult<UserRegistrationResponse>> Register([FromBody] UserRegistrationRequest req)
     {
-        if (string.IsNullOrWhiteSpace(req.Email) || string.IsNullOrWhiteSpace(req.Password) ||
-            string.IsNullOrWhiteSpace(req.FirstName) || string.IsNullOrWhiteSpace(req.LastName))
-            return BadRequest("Required fields: FirstName, LastName, Email, Password.");
+        if (req == null)
+            return BadRequest(new { message = "Request body is required." });
+        if (string.IsNullOrWhiteSpace(req.FirstName))
+            return BadRequest(new { message = "First name is required." });
+        if (string.IsNullOrWhiteSpace(req.LastName))
+            return BadRequest(new { message = "Last name is required." });
+        if (string.IsNullOrWhiteSpace(req.Email))
+            return BadRequest(new { message = "Email is required." });
+        if (string.IsNullOrWhiteSpace(req.Password))
+            return BadRequest(new { message = "Password is required." });
+        if (req.Password.Length < 6)
+            return BadRequest(new { message = "Password must be at least 6 characters." });
 
         try
         {
@@ -81,7 +93,7 @@ public class AuthController : ControllerBase
         }
         catch (InvalidOperationException ex) when (ex.Message == "Email already exists.")
         {
-            return BadRequest(ex.Message);
+            return BadRequest(new { message = ex.Message });
         }
     }
 }

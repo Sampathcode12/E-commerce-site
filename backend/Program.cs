@@ -12,7 +12,8 @@ if (string.IsNullOrEmpty(connectionString))
     throw new InvalidOperationException("Connection string 'DefaultConnection' not found in appsettings.json.");
 
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseSqlServer(connectionString, sql =>
+        sql.MigrationsAssembly(typeof(Program).Assembly.GetName().Name)));
 
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IUserRegistrationService, UserRegistrationService>();
@@ -48,21 +49,25 @@ builder.Services.AddCors(options =>
 var app = builder.Build();
 var logger = app.Services.GetRequiredService<ILogger<Program>>();
 
-// Create database and tables from C# model when they don't exist (backend runs without error)
+// Apply pending migrations on startup (C# model → tables; __EFMigrationsHistory maintained)
 using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     try
     {
-        var created = await context.Database.EnsureCreatedAsync();
-        if (created)
-            logger.LogInformation("Database and tables created.");
+        var pending = (await context.Database.GetPendingMigrationsAsync()).ToList();
+        if (pending.Count > 0)
+        {
+            logger.LogInformation("Applying {Count} migration(s): {Migrations}", pending.Count, string.Join(", ", pending));
+            await context.Database.MigrateAsync();
+            logger.LogInformation("Migrations applied. Migration history updated.");
+        }
         else
-            logger.LogInformation("Database already exists.");
+            logger.LogInformation("Database is up to date (no pending migrations).");
     }
     catch (Exception ex)
     {
-        logger.LogError(ex, "Could not create database. Check SQL Server is running and connection string in appsettings.json.");
+        logger.LogError(ex, "Could not apply migrations. Check SQL Server and connection string in appsettings.json.");
         throw;
     }
 }
