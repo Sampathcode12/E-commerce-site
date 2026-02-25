@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { products } from '../api/client'
+import { getMockProductById } from '../data/mockProducts'
 import './ProductDetail.css'
 
 export default function ProductDetail() {
@@ -13,9 +14,18 @@ export default function ProductDetail() {
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    products.getById(id)
-      .then(setProduct)
-      .catch((e) => setError(e.message))
+    setError(null)
+    products
+      .getById(id)
+      .then((p) => {
+        setProduct(p)
+        setError(null)
+      })
+      .catch(() =>
+        getMockProductById(id)
+          .then(setProduct)
+          .catch((e) => setError(e?.message || 'Product not found'))
+      )
       .finally(() => setLoading(false))
   }, [id])
 

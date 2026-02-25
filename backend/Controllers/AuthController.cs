@@ -95,5 +95,9 @@ public class AuthController : ControllerBase
         {
             return BadRequest(new { message = ex.Message });
         }
+        catch (DbUpdateException ex)
+        {
+            return StatusCode(500, new { message = "Registration could not be saved to the database. Ensure migrations are applied and the users table exists.", detail = ex.InnerException?.Message });
+        }
     }
 }
