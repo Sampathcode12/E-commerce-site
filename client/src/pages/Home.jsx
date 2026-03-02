@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { products } from '../api/client'
-import { getMockProducts } from '../data/mockProducts'
+import { getMockProducts, getPlaceholderImageUrl } from '../data/mockProducts'
 import './Home.css'
 
 const CARD_GRADIENTS = [
@@ -83,11 +83,11 @@ export default function Home() {
                 >
                   <div className="product-card-image-wrap">
                     <img
-                      src={p.imagePath || 'https://via.placeholder.com/300x200?text=No+Image'}
+                      src={p.imagePath || getPlaceholderImageUrl(p.id, 400, 300)}
                       alt={p.name}
                       className="product-card-image"
                       onError={(e) => {
-                        e.target.src = 'https://via.placeholder.com/300x200?text=No+Image'
+                        e.target.src = getPlaceholderImageUrl(p.id, 400, 300)
                       }}
                     />
                     {p.bestSeller && (

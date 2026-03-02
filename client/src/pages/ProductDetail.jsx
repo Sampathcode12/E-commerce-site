@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { products } from '../api/client'
-import { getMockProductById } from '../data/mockProducts'
+import { getMockProductById, getPlaceholderImageUrl } from '../data/mockProducts'
 import './ProductDetail.css'
 
 export default function ProductDetail() {
@@ -44,9 +44,12 @@ export default function ProductDetail() {
     <div className="container product-detail-page">
       <div className="product-detail-card">
         <img
-          src={product.imagePath || 'https://via.placeholder.com/400x300?text=No+Image'}
+          src={product.imagePath || getPlaceholderImageUrl(product.id, 400, 300)}
           alt={product.name}
           className="product-detail-image"
+          onError={(e) => {
+            e.target.src = getPlaceholderImageUrl(product.id, 400, 300)
+          }}
         />
         <div className="product-detail-info">
           <h1>{product.name}</h1>

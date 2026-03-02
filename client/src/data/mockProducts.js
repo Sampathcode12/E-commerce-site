@@ -1,6 +1,9 @@
 // Temporary data for e-commerce home page (use until backend is ready)
 
-const PLACEHOLDER_IMG = 'https://images.unsplash.com/placeholder'
+/** Temporary placeholder image URL (Picsum Photos – stable per id, no API key) */
+export function getPlaceholderImageUrl(id, width = 400, height = 300) {
+  return `https://picsum.photos/seed/${encodeURIComponent(String(id))}/${width}/${height}`
+}
 
 export const categories = [
   { id: 'electronics', name: 'Electronics', icon: '📱', slug: 'electronics' },
@@ -60,7 +63,7 @@ export const mockProducts = [
     category: 'Electronics',
     price: 49.99,
     description: 'Premium sound quality, 20hr battery, comfortable over-ear design.',
-    imagePath: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=300&fit=crop',
+    imagePath: getPlaceholderImageUrl(1),
     quantity: 50,
     featured: true,
     bestSeller: true,
@@ -72,7 +75,7 @@ export const mockProducts = [
     category: 'Electronics',
     price: 129.99,
     description: 'Heart rate, GPS, 50m water resistant. Works with iOS & Android.',
-    imagePath: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=300&fit=crop',
+    imagePath: getPlaceholderImageUrl(2),
     quantity: 30,
     featured: true,
     bestSeller: false,
@@ -84,7 +87,7 @@ export const mockProducts = [
     category: 'Sports & Outdoors',
     price: 89.99,
     description: 'Lightweight, breathable mesh. Perfect for daily runs.',
-    imagePath: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=300&fit=crop',
+    imagePath: getPlaceholderImageUrl(3),
     quantity: 100,
     featured: true,
     bestSeller: true,
@@ -96,7 +99,7 @@ export const mockProducts = [
     category: 'Fashion',
     price: 24.99,
     description: '100% cotton, slim fit. Assorted colors.',
-    imagePath: 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=400&h=300&fit=crop',
+    imagePath: getPlaceholderImageUrl(4),
     quantity: 200,
     featured: false,
     bestSeller: true,
@@ -108,7 +111,7 @@ export const mockProducts = [
     category: 'Home & Living',
     price: 19.99,
     description: '1L capacity, BPA-free, keeps cold 24hr / hot 12hr.',
-    imagePath: 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=400&h=300&fit=crop',
+    imagePath: getPlaceholderImageUrl(5),
     quantity: 150,
     featured: false,
     rating: 4.7,
@@ -119,7 +122,7 @@ export const mockProducts = [
     category: 'Electronics',
     price: 34.99,
     description: 'Adjustable brightness, USB charging port, modern design.',
-    imagePath: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=400&h=300&fit=crop',
+    imagePath: getPlaceholderImageUrl(6),
     quantity: 80,
     featured: true,
     bestSeller: true,
@@ -131,7 +134,7 @@ export const mockProducts = [
     category: 'Beauty & Health',
     price: 59.99,
     description: 'Cleanser, toner, serum, moisturizer, sunscreen. For all skin types.',
-    imagePath: 'https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=400&h=300&fit=crop',
+    imagePath: getPlaceholderImageUrl(7),
     quantity: 60,
     featured: false,
     rating: 4.5,
@@ -142,7 +145,7 @@ export const mockProducts = [
     category: 'Fashion',
     price: 45.99,
     description: 'Padded laptop compartment, water-resistant, multiple pockets.',
-    imagePath: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=300&fit=crop',
+    imagePath: getPlaceholderImageUrl(8),
     quantity: 90,
     featured: false,
     rating: 4.6,
@@ -153,7 +156,7 @@ export const mockProducts = [
     category: 'Sports & Outdoors',
     price: 29.99,
     description: '6mm thick, eco-friendly TPE, with carrying strap.',
-    imagePath: 'https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?w=400&h=300&fit=crop',
+    imagePath: getPlaceholderImageUrl(9),
     quantity: 120,
     featured: false,
     rating: 4.4,
@@ -164,7 +167,7 @@ export const mockProducts = [
     category: 'Books & Stationery',
     price: 12.99,
     description: 'A5 ruled notebooks, 120 pages each. Ideal for study or work.',
-    imagePath: 'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400&h=300&fit=crop',
+    imagePath: getPlaceholderImageUrl(10),
     quantity: 300,
     featured: false,
     rating: 4.2,

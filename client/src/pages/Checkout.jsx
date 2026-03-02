@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { products, orders } from '../api/client'
+import { getPlaceholderImageUrl } from '../data/mockProducts'
 import './Checkout.css'
 
 export default function Checkout() {
@@ -53,8 +54,11 @@ export default function Checkout() {
       <div className="checkout-card">
         <div className="checkout-product">
           <img
-            src={product.imagePath || 'https://via.placeholder.com/120x90?text=No+Image'}
+            src={product.imagePath || getPlaceholderImageUrl(product.id, 240, 180)}
             alt={product.name}
+            onError={(e) => {
+              e.target.src = getPlaceholderImageUrl(product.id, 240, 180)
+            }}
           />
           <div>
             <h3>{product.name}</h3>
