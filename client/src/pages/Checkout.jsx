@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { products, orders } from '../api/client'
 import { getPlaceholderImageUrl } from '../data/mockProducts'
+import { formatPrice } from '../utils/formatPrice'
 import './Checkout.css'
 
 export default function Checkout() {
@@ -62,7 +63,7 @@ export default function Checkout() {
           />
           <div>
             <h3>{product.name}</h3>
-            <p>${Number(product.price).toFixed(2)} each · Stock: {product.quantity}</p>
+            <p>{formatPrice(product.price)} each · Stock: {product.quantity}</p>
           </div>
         </div>
         <form onSubmit={handleSubmit} className="checkout-form">
@@ -85,7 +86,7 @@ export default function Checkout() {
               <option value="bank_transfer">Bank Transfer</option>
             </select>
           </div>
-          <p className="total">Total: <strong>${total.toFixed(2)}</strong></p>
+          <p className="total">Total: <strong>{formatPrice(total)}</strong></p>
           <button type="submit" className="btn" disabled={submitting}>
             {submitting ? 'Placing order...' : 'Place order'}
           </button>

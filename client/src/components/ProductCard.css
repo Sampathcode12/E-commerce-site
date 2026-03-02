@@ -1,0 +1,98 @@
+/* Reusable product card - same look on Home and all product listing pages */
+
+.product-card-unified {
+  border-radius: 12px;
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--color-text);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.product-card-unified:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+  text-decoration: none;
+  color: var(--color-text);
+}
+
+.product-card-unified .product-card-image-wrap {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.product-card-unified .product-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.product-card-unified .product-tag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 6px 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: #fff;
+}
+
+.product-card-unified .product-tag-bestseller,
+.product-card-unified .product-tag-new {
+  background: #ec4899;
+  color: #fff;
+}
+
+.product-card-unified .product-card-body {
+  padding: 1rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.product-card-unified .product-card-name {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: 0.02em;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.product-card-unified .product-card-price {
+  margin: 0;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+@media (max-width: 640px) {
+  .product-card-unified .product-card-body {
+    padding: 0.75rem;
+  }
+
+  .product-card-unified .product-card-name {
+    font-size: 0.8125rem;
+  }
+
+  .product-card-unified .product-card-price {
+    font-size: 0.9375rem;
+  }
+
+  .product-card-unified .product-tag {
+    padding: 4px 8px;
+    font-size: 0.6875rem;
+  }
+}

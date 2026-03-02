@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { orders } from '../api/client'
+import { formatPrice } from '../utils/formatPrice'
 
 export default function Orders() {
   const [list, setList] = useState([])
@@ -39,7 +40,7 @@ export default function Orders() {
                 <td style={{ padding: '0.75rem' }}>{o.id}</td>
                 <td style={{ padding: '0.75rem' }}>{o.productName}</td>
                 <td style={{ padding: '0.75rem', textAlign: 'right' }}>{o.quantity}</td>
-                <td style={{ padding: '0.75rem', textAlign: 'right' }}>${Number(o.totalPrice).toFixed(2)}</td>
+                <td style={{ padding: '0.75rem', textAlign: 'right' }}>{formatPrice(o.totalPrice)}</td>
                 <td style={{ padding: '0.75rem', color: 'var(--color-text-muted)', fontSize: '0.875rem' }}>
                   {new Date(o.orderDate).toLocaleDateString()}
                 </td>
