@@ -69,7 +69,7 @@ export default function Layout() {
                 {categories.map((cat) => (
                   <Link
                     key={cat.id}
-                    to={`/#products`}
+                    to={`/?category=${cat.id}`}
                     className="nav-dropdown-item"
                     onClick={() => setCategoriesOpen(false)}
                   >
@@ -93,7 +93,7 @@ export default function Layout() {
                   onMouseLeave={() => setHoveredCategory(null)}
                 >
                   <Link
-                    to={`/#products`}
+                    to={`/?category=${cat.id}`}
                     className={`nav-link ${hoveredCategory === cat.id ? 'nav-link-active' : ''}`}
                   >
                     {cat.name}
@@ -109,7 +109,7 @@ export default function Layout() {
                                 {sub.children.map((child, j) => (
                                   <li key={j}>
                                     <Link
-                                      to={`/#products`}
+                                      to={`/?category=${cat.id}&sub=${encodeURIComponent(child)}`}
                                       className="nav-mega-link"
                                       onClick={() => setHoveredCategory(null)}
                                     >
@@ -126,7 +126,7 @@ export default function Layout() {
                   )}
                 </div>
               ) : (
-                <Link key={cat.id} to={`/#products`} className="nav-link">
+                <Link key={cat.id} to={`/?category=${cat.id}`} className="nav-link">
                   {cat.name}
                 </Link>
               )

@@ -56,12 +56,14 @@ export const categorySubcategories = {
   ],
 }
 
-/* Temporary product data – flower bouquets with placeholder images and Rs. prices */
+/* Temporary product data – with categoryId and subcategory for filtering */
 export const mockProducts = [
   {
     id: 1,
     name: 'Dreaming About You',
-    category: 'Flowers',
+    category: 'Electronics',
+    categoryId: 'electronics',
+    subcategory: 'Smartphones',
     price: 4350,
     description: 'Beautiful bouquet to show you care. Temporary placeholder product.',
     imagePath: getPlaceholderImageUrl(1),
@@ -74,7 +76,9 @@ export const mockProducts = [
   {
     id: 2,
     name: 'Dreamy Cloud',
-    category: 'Flowers',
+    category: 'Electronics',
+    categoryId: 'electronics',
+    subcategory: 'Headphones',
     price: 5850,
     description: 'Soft and dreamy arrangement. Temporary placeholder product.',
     imagePath: getPlaceholderImageUrl(2),
@@ -87,7 +91,9 @@ export const mockProducts = [
   {
     id: 3,
     name: 'She Shines',
-    category: 'Flowers',
+    category: 'Fashion',
+    categoryId: 'fashion',
+    subcategory: 'Dresses',
     price: 6850,
     description: 'Bright and radiant bouquet. Temporary placeholder product.',
     imagePath: getPlaceholderImageUrl(3),
@@ -100,7 +106,9 @@ export const mockProducts = [
   {
     id: 4,
     name: 'Bloom Her',
-    category: 'Flowers',
+    category: 'Fashion',
+    categoryId: 'fashion',
+    subcategory: 'T-Shirts',
     price: 4450,
     description: 'Fresh blooms for every occasion. Temporary placeholder product.',
     imagePath: getPlaceholderImageUrl(4),
@@ -113,7 +121,9 @@ export const mockProducts = [
   {
     id: 5,
     name: 'Sweet Blossom',
-    category: 'Flowers',
+    category: 'Home & Living',
+    categoryId: 'home',
+    subcategory: 'Living Room',
     price: 3200,
     description: 'Delicate and sweet arrangement. Temporary placeholder product.',
     imagePath: getPlaceholderImageUrl(5),
@@ -126,7 +136,9 @@ export const mockProducts = [
   {
     id: 6,
     name: 'Sunset Bouquet',
-    category: 'Flowers',
+    category: 'Sports & Outdoors',
+    categoryId: 'sports',
+    subcategory: 'Running',
     price: 5100,
     description: 'Warm tones for evening gifting. Temporary placeholder product.',
     imagePath: getPlaceholderImageUrl(6),
@@ -139,7 +151,9 @@ export const mockProducts = [
   {
     id: 7,
     name: 'Morning Dew',
-    category: 'Flowers',
+    category: 'Beauty & Health',
+    categoryId: 'beauty',
+    subcategory: 'Skincare',
     price: 3950,
     description: 'Fresh as morning. Temporary placeholder product.',
     imagePath: getPlaceholderImageUrl(7),
@@ -152,7 +166,9 @@ export const mockProducts = [
   {
     id: 8,
     name: 'Eternal Rose',
-    category: 'Flowers',
+    category: 'Books & Stationery',
+    categoryId: 'books',
+    subcategory: 'Notebooks',
     price: 7600,
     description: 'Classic roses, long-lasting. Temporary placeholder product.',
     imagePath: getPlaceholderImageUrl(8),
@@ -165,7 +181,9 @@ export const mockProducts = [
   {
     id: 9,
     name: 'Garden Joy',
-    category: 'Flowers',
+    category: 'Home & Living',
+    categoryId: 'home',
+    subcategory: 'Garden',
     price: 4200,
     description: 'A mix of garden favourites. Temporary placeholder product.',
     imagePath: getPlaceholderImageUrl(9),
@@ -178,7 +196,9 @@ export const mockProducts = [
   {
     id: 10,
     name: 'Pure White',
-    category: 'Flowers',
+    category: 'Electronics',
+    categoryId: 'electronics',
+    subcategory: 'Laptops',
     price: 5500,
     description: 'Elegant white bouquet. Temporary placeholder product.',
     imagePath: getPlaceholderImageUrl(10),
