@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { products, uploadImages, productImageUrl } from '../api/client'
+import { products, orders, uploadImages, productImageUrl } from '../api/client'
 import { categories, categorySubcategories } from '../data/mockProducts'
 import { formatPrice } from '../utils/formatPrice'
 import './Admin.css'
@@ -34,6 +34,9 @@ export default function Admin() {
   const [pendingImageFiles, setPendingImageFiles] = useState([])
   const [pendingImageUrls, setPendingImageUrls] = useState([])
   const [uploading, setUploading] = useState(false)
+  const [sales, setSales] = useState([])
+  const [salesLoading, setSalesLoading] = useState(false)
+  const [showSales, setShowSales] = useState(false)
 
   useEffect(() => {
     const urls = pendingImageFiles.map((f) => URL.createObjectURL(f))
@@ -53,6 +56,18 @@ export default function Admin() {
   useEffect(() => {
     loadProducts()
   }, [])
+
+  const loadSales = () => {
+    setSalesLoading(true)
+    orders.getSales()
+      .then((data) => setSales(Array.isArray(data) ? data : []))
+      .catch(() => setSales([]))
+      .finally(() => setSalesLoading(false))
+  }
+
+  useEffect(() => {
+    if (showSales) loadSales()
+  }, [showSales])
 
   const resetForm = () => {
     setForm({
@@ -213,7 +228,52 @@ export default function Admin() {
             Add product
           </button>
         )}
+        <button type="button" className="btn btn-secondary admin-btn-sales" onClick={() => setShowSales((s) => !s)}>
+          {showSales ? 'Hide selling details' : 'View selling details'}
+        </button>
       </section>
+
+      {showSales && (
+        <section className="admin-sales-section">
+          <h2>Selling details</h2>
+          {salesLoading ? (
+            <p>Loading sales...</p>
+          ) : sales.length === 0 ? (
+            <p className="admin-empty">No sales yet. Orders from checkout appear here.</p>
+          ) : (
+            <div className="admin-sales-table-wrap">
+              <table className="admin-table admin-sales-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Order #</th>
+                    <th>Customer</th>
+                    <th>Product</th>
+                    <th>Qty</th>
+                    <th>Unit price</th>
+                    <th>Total</th>
+                    <th>Payment</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {sales.map((row) => (
+                    <tr key={row.id}>
+                      <td>{new Date(row.sellDate).toLocaleString()}</td>
+                      <td>{row.orderId}</td>
+                      <td>{row.customerEmail}</td>
+                      <td>{row.productName}</td>
+                      <td>{row.quantity}</td>
+                      <td>{formatPrice(row.unitPrice)}</td>
+                      <td>{formatPrice(row.totalPrice)}</td>
+                      <td>{row.paymentMethod}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </section>
+      )}
 
       {(adding || editingId) && (
         <form className="admin-form" onSubmit={adding ? handleAdd : handleUpdate}>

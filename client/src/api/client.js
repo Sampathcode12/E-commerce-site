@@ -47,6 +47,8 @@ function getErrorMessage(data, status) {
   }
   if (data.title && data.title !== 'One or more validation errors occurred') return data.title
   if (data.detail) return data.detail
+  if (status === 404)
+    return 'Order service not found (404). Start the backend: run "dotnet run" in the backend folder. If needed, run "dotnet ef database update" there to create the orders table.'
   return `Error ${status}`
 }
 
@@ -68,6 +70,8 @@ export const products = {
 export const orders = {
   getMyOrders: () => api('/orders'),
   placeOrder: (body) => api('/orders', { method: 'POST', body: JSON.stringify(body) }),
+  placeOrderCart: (body) => api('/orders/cart', { method: 'POST', body: JSON.stringify(body) }),
+  getSales: () => api('/orders/admin/sales'),
 }
 
 export async function uploadImages(files) {

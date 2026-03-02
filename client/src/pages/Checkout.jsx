@@ -56,13 +56,13 @@ export default function Checkout() {
     setSubmitting(true)
     setError(null)
     try {
-      for (const item of cartItems) {
-        await orders.placeOrder({
+      await orders.placeOrderCart({
+        items: cartItems.map((item) => ({
           productId: item.productId,
           quantity: item.orderQuantity || 1,
-          paymentMethod,
-        })
-      }
+        })),
+        paymentMethod,
+      })
       clearCart()
       navigate('/orders')
     } catch (err) {
