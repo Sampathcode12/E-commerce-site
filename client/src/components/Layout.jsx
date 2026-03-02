@@ -1,15 +1,16 @@
 import { useState } from 'react'
 import { Outlet, Link } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
+import { useCart } from '../context/CartContext'
 import { categories, categorySubcategories } from '../data/mockProducts'
 import './Layout.css'
 
 export default function Layout() {
   const { user, token, logout } = useAuth()
+  const { cartCount } = useCart()
   const [searchQuery, setSearchQuery] = useState('')
   const [categoriesOpen, setCategoriesOpen] = useState(false)
   const [hoveredCategory, setHoveredCategory] = useState(null)
-  const cartCount = 0
 
   return (
     <div className="layout">
@@ -41,7 +42,7 @@ export default function Layout() {
               <span className="header-icon" aria-hidden>👤</span>
               <span>Account</span>
             </Link>
-            <Link to="/" className="header-link header-cart">
+            <Link to="/cart" className="header-link header-cart">
               <span className="header-icon" aria-hidden>🛒</span>
               <span>Cart</span>
               {cartCount > 0 && <span className="cart-badge">{cartCount}</span>}

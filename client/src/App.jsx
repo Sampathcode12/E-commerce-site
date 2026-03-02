@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import ProductDetail from './pages/ProductDetail'
+import Cart from './pages/Cart'
 import Checkout from './pages/Checkout'
 import Account from './pages/Account'
 import Orders from './pages/Orders'
@@ -24,6 +25,8 @@ export default function App() {
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
         <Route path="product/:id" element={<ProductDetail />} />
+        <Route path="cart" element={<Cart />} />
+        <Route path="checkout" element={<PrivateRoute><Checkout /></PrivateRoute>} />
         <Route path="checkout/:id" element={<PrivateRoute><Checkout /></PrivateRoute>} />
         <Route path="account" element={<PrivateRoute><Account /></PrivateRoute>} />
         <Route path="orders" element={<PrivateRoute><Orders /></PrivateRoute>} />

@@ -1,17 +1,8 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import { products } from '../api/client'
-import { getMockProducts, getPlaceholderImageUrl } from '../data/mockProducts'
+import { getMockProducts } from '../data/mockProducts'
+import ProductCard from '../components/ProductCard'
 import './Home.css'
-
-const CARD_GRADIENTS = [
-  'linear-gradient(135deg, #fefce8 0%, #fef9c3 100%)',
-  'linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)',
-  'linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%)',
-  'linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%)',
-  'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%)',
-  'linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%)',
-]
 
 export default function Home() {
   const [list, setList] = useState([])
@@ -23,13 +14,23 @@ export default function Home() {
     products
       .getAll()
       .then((data) => {
-        setList(Array.isArray(data) ? data : [])
-        setUseMock(false)
+        const items = Array.isArray(data) ? data : []
+        if (items.length > 0) {
+          setList(items)
+          setUseMock(false)
+          return
+        }
+        return getMockProducts().then((mock) => {
+          setList(mock)
+          setUseMock(true)
+        })
       })
-      .catch(() => {
-        getMockProducts().then(setList)
-        setUseMock(true)
-      })
+      .catch(() =>
+        getMockProducts().then((mock) => {
+          setList(mock)
+          setUseMock(true)
+        })
+      )
       .finally(() => setLoading(false))
   }, [])
 
@@ -46,7 +47,6 @@ export default function Home() {
   return (
     <div className="home">
       <div className="container">
-        {/* Show Filters bar - Lassana style */}
         <section className="filters-bar">
           <button
             type="button"
@@ -68,39 +68,13 @@ export default function Home() {
           </div>
         )}
 
-        {/* Product grid - Lassana-style cards */}
         <section id="products" className="products-section">
           {list.length === 0 ? (
             <p className="no-products">No products available.</p>
           ) : (
-            <div className="product-grid product-grid-lassana">
+            <div className="product-grid product-grid-unified">
               {list.map((p, index) => (
-                <Link
-                  key={p.id}
-                  to={`/product/${p.id}`}
-                  className="product-card product-card-lassana"
-                  style={{ background: CARD_GRADIENTS[index % CARD_GRADIENTS.length] }}
-                >
-                  <div className="product-card-image-wrap">
-                    <img
-                      src={p.imagePath || getPlaceholderImageUrl(p.id, 400, 300)}
-                      alt={p.name}
-                      className="product-card-image"
-                      onError={(e) => {
-                        e.target.src = getPlaceholderImageUrl(p.id, 400, 300)
-                      }}
-                    />
-                    {p.bestSeller && (
-                      <span className="product-tag product-tag-bestseller">Best Seller</span>
-                    )}
-                  </div>
-                  <div className="product-card-body">
-                    <h3 className="product-card-name">{p.name.toUpperCase()}</h3>
-                    <p className="product-card-price">
-                      ${Number(p.price).toLocaleString('en-US', { minimumFractionDigits: 2 })}
-                    </p>
-                  </div>
-                </Link>
+                <ProductCard key={p.id} product={p} gradientIndex={index} />
               ))}
             </div>
           )}
