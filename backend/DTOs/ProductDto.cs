@@ -22,4 +22,18 @@ public class CreateProductRequest
     public string SubCategory { get; set; } = string.Empty;
     public decimal Price { get; set; }
     public string? Description { get; set; }
+    /// <summary>Comma-separated image URLs (e.g. from upload), or single URL.</summary>
+    public string? ImagePath { get; set; }
+}
+
+public class UpdateProductRequest
+{
+    public string? Name { get; set; }
+    public decimal? Price { get; set; }
+    public int? Quantity { get; set; }
+    public string? Category { get; set; }
+    public string? SubCategory { get; set; }
+    public string? Description { get; set; }
+    /// <summary>Comma-separated image URLs or single URL.</summary>
+    public string? ImagePath { get; set; }
 }

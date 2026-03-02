@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { getPlaceholderImageUrl } from '../data/mockProducts'
+import { productImageUrl } from '../api/client'
 import { formatPrice } from '../utils/formatPrice'
 import './ProductCard.css'
 
@@ -17,7 +18,8 @@ const CARD_GRADIENTS = [
  * Use on Home and any page that lists products.
  */
 export default function ProductCard({ product, gradientIndex = 0 }) {
-  const imageUrl = product.imagePath || getPlaceholderImageUrl(product.id, 400, 300)
+  const firstPath = (product.imagePath || product.ImagePath || '').split(',')[0]?.trim()
+  const imageUrl = (firstPath && productImageUrl(firstPath)) || getPlaceholderImageUrl(product.id, 400, 300)
   const style = { background: CARD_GRADIENTS[gradientIndex % CARD_GRADIENTS.length] }
 
   return (

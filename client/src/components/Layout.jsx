@@ -136,6 +136,9 @@ export default function Layout() {
           <div className="nav-actions">
             {token ? (
               <>
+                {user?.userType === 'admin' && (
+                  <Link to="/admin" className="nav-link">Admin</Link>
+                )}
                 <Link to="/orders" className="nav-link">Orders</Link>
                 <span className="nav-user">{user?.email}</span>
                 <button type="button" className="btn btn-nav" onClick={logout}>

@@ -12,19 +12,27 @@ export default function Login() {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
+  const doLogin = async (loginEmail, loginPassword) => {
     setError('')
     setLoading(true)
     try {
-      const res = await auth.login(email, password)
+      const res = await auth.login(loginEmail, loginPassword)
       setToken(res.token, { userId: res.userId, email: res.email, userType: res.userType })
-      navigate('/')
+      navigate(res.userType === 'admin' ? '/admin' : '/')
     } catch (err) {
       setError(err.message || 'Login failed')
     } finally {
       setLoading(false)
     }
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    doLogin(email, password)
+  }
+
+  const handleAdminLogin = () => {
+    doLogin('admin@example.com', 'adminpassword')
   }
 
   return (
@@ -58,6 +66,14 @@ export default function Login() {
           </div>
           <button type="submit" className="btn btn-primary full-width" disabled={loading}>
             {loading ? 'Signing in...' : 'Sign in'}
+          </button>
+          <button
+            type="button"
+            className="btn btn-admin-login full-width"
+            onClick={handleAdminLogin}
+            disabled={loading}
+          >
+            Sign in as admin (demo)
           </button>
         </form>
         <p className="auth-footer">

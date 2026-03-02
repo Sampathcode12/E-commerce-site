@@ -4,6 +4,26 @@
   padding: 1.5rem 0 3rem;
 }
 
+.admin-hint {
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 8px;
+  font-size: 0.9375rem;
+  color: #1e40af;
+}
+
+.admin-hint a {
+  font-weight: 600;
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+.admin-hint a:hover {
+  color: #1e3a8a;
+}
+
 .home-loading {
   text-align: center;
   padding: 3rem;

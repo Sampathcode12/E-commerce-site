@@ -54,7 +54,7 @@ public class ProductsController : ControllerBase
     }
 
     [HttpPost]
-    [Microsoft.AspNetCore.Authorization.Authorize(Roles = "seller,admin")]
+    [Microsoft.AspNetCore.Authorization.Authorize(Policy = "AdminOrSeller")]
     public async Task<ActionResult<ProductDto>> Create([FromBody] CreateProductRequest req)
     {
         if (await _db.Products.AnyAsync(x => x.ProductId == req.ProductId))
@@ -69,7 +69,7 @@ public class ProductsController : ControllerBase
             SubCategory = req.SubCategory,
             Price = req.Price,
             Description = req.Description,
-            ImagePath = "/uploads/placeholder.png"
+            ImagePath = !string.IsNullOrWhiteSpace(req.ImagePath) ? req.ImagePath : "/uploads/placeholder.png"
         };
         _db.Products.Add(product);
         await _db.SaveChangesAsync();
@@ -86,5 +86,47 @@ public class ProductsController : ControllerBase
             ImagePath = product.ImagePath,
             Description = product.Description
         });
+    }
+
+    [HttpPut("{id:int}")]
+    [Microsoft.AspNetCore.Authorization.Authorize(Policy = "AdminOrSeller")]
+    public async Task<ActionResult<ProductDto>> Update(int id, [FromBody] UpdateProductRequest req)
+    {
+        var product = await _db.Products.FindAsync(id);
+        if (product == null) return NotFound();
+
+        if (req.Name != null) product.Name = req.Name;
+        if (req.Price.HasValue) product.Price = req.Price.Value;
+        if (req.Quantity.HasValue) product.Quantity = req.Quantity.Value;
+        if (req.Category != null) product.Category = req.Category;
+        if (req.SubCategory != null) product.SubCategory = req.SubCategory;
+        if (req.Description != null) product.Description = req.Description;
+        if (req.ImagePath != null) product.ImagePath = req.ImagePath;
+
+        await _db.SaveChangesAsync();
+
+        return Ok(new ProductDto
+        {
+            Id = product.Id,
+            Name = product.Name,
+            ProductId = product.ProductId,
+            Quantity = product.Quantity,
+            Category = product.Category,
+            SubCategory = product.SubCategory,
+            Price = product.Price,
+            ImagePath = product.ImagePath,
+            Description = product.Description
+        });
+    }
+
+    [HttpDelete("{id:int}")]
+    [Microsoft.AspNetCore.Authorization.Authorize(Policy = "AdminOrSeller")]
+    public async Task<ActionResult> Delete(int id)
+    {
+        var product = await _db.Products.FindAsync(id);
+        if (product == null) return NotFound();
+        _db.Products.Remove(product);
+        await _db.SaveChangesAsync();
+        return NoContent();
     }
 }
