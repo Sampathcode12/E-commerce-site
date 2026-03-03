@@ -12,6 +12,9 @@ export function productImageUrl(path) {
   return `${API_ORIGIN}${path.startsWith('/') ? path : `/${path}`}`
 }
 
+const SERVER_UNREACHABLE_MSG =
+  'Cannot reach server. Start the backend: open a terminal, run "cd backend" then "dotnet run".'
+
 export async function api(endpoint, options = {}) {
   const url = `${API_BASE}${endpoint}`
   const headers = {
@@ -21,7 +24,15 @@ export async function api(endpoint, options = {}) {
   const token = getToken()
   if (token) headers['Authorization'] = `Bearer ${token}`
 
-  const res = await fetch(url, { ...options, headers })
+  let res
+  try {
+    res = await fetch(url, { ...options, headers })
+  } catch (err) {
+    const msg = err?.message || ''
+    if (msg.includes('fetch') || msg.includes('network') || msg.includes('Failed'))
+      throw new Error(SERVER_UNREACHABLE_MSG)
+    throw new Error(err?.message || SERVER_UNREACHABLE_MSG)
+  }
   const data = await res.json().catch(() => ({}))
   if (!res.ok) {
     const message = getErrorMessage(data, res.status)
@@ -71,6 +82,7 @@ export const orders = {
   getMyOrders: () => api('/orders'),
   placeOrder: (body) => api('/orders', { method: 'POST', body: JSON.stringify(body) }),
   placeOrderCart: (body) => api('/orders/cart', { method: 'POST', body: JSON.stringify(body) }),
+  getAllOrders: () => api('/orders/admin/orders'),
   getSales: () => api('/orders/admin/sales'),
 }
 

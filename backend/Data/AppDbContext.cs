@@ -9,6 +9,7 @@ public class AppDbContext : DbContext
 
     public DbSet<User> Users => Set<User>();
     public DbSet<Product> Products => Set<Product>();
+    public DbSet<Order> Orders => Set<Order>();
     public DbSet<Seller> Sellers => Set<Seller>();
     public DbSet<Sell> Sells => Set<Sell>();
 
@@ -53,6 +54,15 @@ public class AppDbContext : DbContext
             .WithOne(u => u.SellerProfile)
             .HasForeignKey<Seller>(s => s.SellerId);
 
+        modelBuilder.Entity<Order>(e =>
+        {
+            e.ToTable("orders");
+            e.Property(o => o.UserId).HasColumnName("user_id");
+            e.Property(o => o.OrderDate).HasColumnName("order_date");
+            e.Property(o => o.PaymentMethod).HasColumnName("payment_method");
+            e.HasOne(o => o.User).WithMany().HasForeignKey(o => o.UserId);
+        });
+
         modelBuilder.Entity<Sell>(e =>
         {
             e.ToTable("sells");
@@ -62,6 +72,7 @@ public class AppDbContext : DbContext
             e.Property(s => s.TotalPrice).HasColumnName("total_price").HasPrecision(18, 2);
             e.Property(s => s.PaymentMethod).HasColumnName("payment_method");
             e.Property(s => s.SellDate).HasColumnName("sell_date");
+            e.HasOne<Order>().WithMany(o => o.Sells).HasForeignKey(s => s.OrderId);
         });
     }
 }
