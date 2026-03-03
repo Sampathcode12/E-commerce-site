@@ -1,8 +1,8 @@
-# How to Add a Migration
+# Migrations: C# model → tables and migration history
 
-**When you add a new migration to the code, the database is updated automatically the next time you run the backend** (F5 or `dotnet run`). The app applies any pending migrations on startup.
-
-EF Core does **not** create migration *files* automatically when the app runs. You add those with the CLI or script below; then running the app applies them to the DB.
+- **Add migration:** Generates a migration `.cs` file from your C# model (DbContext/entities). Run when you change the model.
+- **Update database:** Applies pending migrations to the DB and updates the **`__EFMigrationsHistory`** table so history is maintained.
+- **On backend run:** The app applies any pending migrations on startup, so the DB and migration history stay in sync.
 
 ## Option 1: Use the script (easiest)
 
@@ -33,20 +33,22 @@ Use a normal terminal (Command Prompt or PowerShell), **not** the Package Manage
 cd C:\xampp\htdocs\E-commerce-site
 ```
 
-## 3. Add a new migration
+## 3. Add a new migration (creates .cs from C# model)
 
 From the **solution folder** (E-commerce-site), run:
 
 ```bash
-dotnet ef migrations add UserAndAnotherTable --project backend
+dotnet ef migrations add InitialCreate --project backend
 ```
 
-Or go into the backend folder first, then run:
+(Use any name instead of `InitialCreate`, e.g. `AddUserTable`.) Or from the backend folder:
 
 ```bash
 cd backend
-dotnet ef migrations add UserAndAnotherTable
+dotnet ef migrations add InitialCreate
 ```
+
+This creates/updates files under `backend/Migrations/` and the model snapshot. No database change yet.
 
 ## 4. If "dotnet ef" is not found
 
@@ -58,11 +60,15 @@ dotnet tool install --global dotnet-ef
 
 Close and reopen the terminal, then run the migration command again.
 
-## 5. Update the database
+## 5. Update the database (apply migrations and migration history)
 
-After adding a migration, update the DB in either way:
+After adding a migration, apply it so the C# model becomes tables and **`__EFMigrationsHistory`** is updated:
 
-- **Option A (recommended):** Run the backend — migrations apply automatically on startup.  
+- **Option A (recommended):** Run the backend — migrations apply on startup.  
   From `backend`: `dotnet run`, or press F5 in Visual Studio.
 - **Option B:** Apply from terminal without starting the API:  
-  `dotnet ef database update --project backend`
+  ```bash
+  dotnet ef database update --project backend
+  ```
+
+Both options run the pending migration(s), create/alter tables, and insert a row into `__EFMigrationsHistory` for each applied migration so history is maintained.

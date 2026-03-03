@@ -1,9 +1,14 @@
+using System.Security.Claims;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
 using ECommerceApi.Data;
 using ECommerceApi.Services;
+
+// Ensure JWT "role" claim is used as-is for [Authorize(Roles = "admin")]
+JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,17 +35,33 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateAudience = true,
             ValidAudience = builder.Configuration["Jwt:Audience"],
             ValidateLifetime = true,
-            ClockSkew = TimeSpan.Zero
+            ClockSkew = TimeSpan.Zero,
+            RoleClaimType = "role"
         };
     });
 
-builder.Services.AddAuthorization();
+builder.Services.AddAuthorization(options =>
+{
+    // Accept role from either "role" or Microsoft ClaimTypes.Role (handles both token formats)
+    options.AddPolicy("AdminOrSeller", policy => policy.RequireAssertion(ctx =>
+    {
+        var user = ctx.User;
+        bool HasRole(string role) =>
+            user.HasClaim("role", role) || user.HasClaim(ClaimTypes.Role, role) || user.IsInRole(role);
+        return HasRole("admin") || HasRole("seller");
+    }));
+});
 builder.Services.AddControllers();
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(policy =>
     {
-        policy.WithOrigins("http://localhost:5173", "http://localhost:3000")
+        policy.WithOrigins(
+                "http://localhost:5173",
+                "http://localhost:5174",
+                "http://localhost:3000",
+                "http://127.0.0.1:5173",
+                "http://127.0.0.1:5174")
             .AllowAnyHeader()
             .AllowAnyMethod();
     });
@@ -73,6 +94,7 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.UseCors();
+app.UseStaticFiles();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();

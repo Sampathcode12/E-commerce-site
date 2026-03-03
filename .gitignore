@@ -1,0 +1,34 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build outputs
+backend/bin/
+backend/obj/
+**/bin/
+**/obj/
+
+# NuGet
+**/packages/
+*.nupkg
+
+# Node (React client)
+client/node_modules/
+client/dist/
+
+# Environment / secrets
+*.env
+!*.env.example
+appsettings.Development.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+*.swp
+*.swo

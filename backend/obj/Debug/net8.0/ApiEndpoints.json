@@ -53,8 +53,34 @@
   },
   {
     "ContainingType": "ECommerceApi.Controllers.OrdersController",
+    "Method": "PlaceOrder",
+    "RelativePath": "api/orders",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "req",
+        "Type": "ECommerceApi.DTOs.PlaceOrderRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ECommerceApi.DTOs.OrderDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ECommerceApi.Controllers.OrdersController",
     "Method": "GetMyOrders",
-    "RelativePath": "api/Orders",
+    "RelativePath": "api/orders",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -73,15 +99,55 @@
   },
   {
     "ContainingType": "ECommerceApi.Controllers.OrdersController",
-    "Method": "PlaceOrder",
-    "RelativePath": "api/Orders",
+    "Method": "GetAllOrders",
+    "RelativePath": "api/orders/admin/orders",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[ECommerceApi.DTOs.OrderWithCustomerDto, ECommerceApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ECommerceApi.Controllers.OrdersController",
+    "Method": "GetAllSales",
+    "RelativePath": "api/orders/admin/sales",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[ECommerceApi.DTOs.SellDetailDto, ECommerceApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ECommerceApi.Controllers.OrdersController",
+    "Method": "PlaceOrderCart",
+    "RelativePath": "api/orders/cart",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "req",
-        "Type": "ECommerceApi.DTOs.PlaceOrderRequest",
+        "Type": "ECommerceApi.DTOs.PlaceOrderCartRequest",
         "IsRequired": true
       }
     ],
@@ -160,6 +226,79 @@
     "ReturnTypes": [
       {
         "Type": "ECommerceApi.DTOs.ProductDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ECommerceApi.Controllers.ProductsController",
+    "Method": "Update",
+    "RelativePath": "api/Products/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "req",
+        "Type": "ECommerceApi.DTOs.UpdateProductRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ECommerceApi.DTOs.ProductDto",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ECommerceApi.Controllers.ProductsController",
+    "Method": "Delete",
+    "RelativePath": "api/Products/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ECommerceApi.Controllers.UploadController",
+    "Method": "Upload",
+    "RelativePath": "api/upload",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "files",
+        "Type": "Microsoft.AspNetCore.Http.IFormFileCollection",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ECommerceApi.Controllers.UploadResponse",
         "MediaTypes": [
           "text/plain",
           "application/json",

@@ -1,3 +1,50 @@
+.orders-page-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.orders-page-header h1 {
+  margin: 0;
+}
+
+.orders-view-toggle {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.btn-orders-tab {
+  padding: 0.4rem 0.75rem;
+  font-size: 0.875rem;
+  border: 1px solid var(--color-border, #e2e8f0);
+  background: var(--color-surface, #fff);
+  border-radius: 6px;
+  cursor: pointer;
+  color: var(--color-text-muted, #64748b);
+}
+
+.btn-orders-tab:hover {
+  background: #f1f5f9;
+  color: var(--color-text, #0f172a);
+}
+
+.btn-orders-tab.active {
+  background: #16a34a;
+  color: #fff;
+  border-color: #16a34a;
+}
+
+.orders-inline-error {
+  margin-bottom: 1rem;
+}
+
+.order-customer {
+  font-size: 0.875rem;
+  color: var(--color-text-muted, #64748b);
+}
+
 .orders-list {
   display: flex;
   flex-direction: column;

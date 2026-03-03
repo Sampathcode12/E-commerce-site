@@ -3,6 +3,14 @@
   "WorkspaceRootPath": "C:\\xampp\\htdocs\\E-commerce-site\\backend\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}|ECommerceApi.csproj|c:\\xampp\\htdocs\\e-commerce-site\\backend\\controllers\\uploadcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}|ECommerceApi.csproj|solutionrelative:controllers\\uploadcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}|ECommerceApi.csproj|c:\\xampp\\htdocs\\e-commerce-site\\backend\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}|ECommerceApi.csproj|solutionrelative:controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}|ECommerceApi.csproj|c:\\xampp\\htdocs\\e-commerce-site\\backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}|ECommerceApi.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -48,19 +56,43 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\xampp\\htdocs\\E-commerce-site\\backend\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\xampp\\htdocs\\E-commerce-site\\backend\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAADoAAAAAAAAAAAAYwDsAAAAMAAAAAAAAAA==",
+              "Title": "UploadController.cs",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\E-commerce-site\\backend\\Controllers\\UploadController.cs",
+              "RelativeDocumentMoniker": "Controllers\\UploadController.cs",
+              "ToolTip": "C:\\xampp\\htdocs\\E-commerce-site\\backend\\Controllers\\UploadController.cs",
+              "RelativeToolTip": "Controllers\\UploadController.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAQwDUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-24T18:26:57.575Z",
+              "WhenOpened": "2026-03-02T13:12:16.011Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\E-commerce-site\\backend\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AuthController.cs",
+              "ToolTip": "C:\\xampp\\htdocs\\E-commerce-site\\backend\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "Controllers\\AuthController.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAAwAQAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-24T20:08:35.614Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\xampp\\htdocs\\E-commerce-site\\backend\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\xampp\\htdocs\\E-commerce-site\\backend\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAD0AAAAAAAAAAAAYwEMAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-24T18:26:57.575Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "SqlConnection.cs",
               "DocumentMoniker": "C:\\Users\\Lahiru\\AppData\\Local\\Temp\\.vsdbgsrc\\398ae81ea547d638768fff59641ffcd9c3babcef64b4b7ab703618baf49613d5\\SqlConnection.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\Users\\Lahiru\\AppData\\Local\\Temp\\.vsdbgsrc\\398ae81ea547d638768fff59641ffcd9c3babcef64b4b7ab703618baf49613d5\\SqlConnection.cs",
@@ -73,7 +105,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "appsettings.Development.json",
               "DocumentMoniker": "C:\\xampp\\htdocs\\E-commerce-site\\backend\\appsettings.Development.json",
               "RelativeDocumentMoniker": "appsettings.Development.json",
@@ -81,12 +113,11 @@
               "RelativeToolTip": "appsettings.Development.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-02-24T18:23:48.025Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-24T18:23:48.025Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\xampp\\htdocs\\E-commerce-site\\backend\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
@@ -94,8 +125,7 @@
               "RelativeToolTip": "appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-02-24T18:21:03.754Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-02-24T18:21:03.754Z"
             }
           ]
         },

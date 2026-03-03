@@ -1,0 +1,10 @@
+{
+  "name": "e-commerce-site",
+  "private": true,
+  "description": "E-commerce site (client + backend)",
+  "scripts": {
+    "dev": "npm run dev --prefix client",
+    "build": "npm run build --prefix client",
+    "preview": "npm run preview --prefix client"
+  }
+}
